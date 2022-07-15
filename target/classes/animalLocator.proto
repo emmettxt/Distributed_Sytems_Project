@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ds.animalLocator";
+option java_outer_classname = "AnimalLocatorImpl";
+import "google/protobuf/timestamp.proto";
+
+package animalLocator;
+
+// Interface exported by the server.
+service animalLocator {
+  //stream of LocationMesssages from client, server should return last recieved message.
+  rpc LocationUpdater(stream LocationMessage) returns (LocationResponse) {}
+    
+}
+
+message Point {
+  int32 latitude = 1;
+  int32 longitude = 2;
+}
+
+message LocationMessage {
+  Point point = 1;
+  string AnimalId = 2;
+  google.protobuf.Timestamp Time = 3;
+}
+
+message LocationResponse{
+  int32 countRecieved = 1;
+  LocationMessage LastRecieved = 2;
+}
