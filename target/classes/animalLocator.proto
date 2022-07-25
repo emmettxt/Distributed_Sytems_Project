@@ -11,7 +11,7 @@ package animalLocator;
 service animalLocator {
   //stream of LocationMesssages from client, server should return last recieved message.
   rpc LocationUpdater(stream LocationMessage) returns (LocationResponse) {}
-    
+
 }
 
 message Point {
@@ -28,4 +28,8 @@ message LocationMessage {
 message LocationResponse{
   int32 countRecieved = 1;
   LocationMessage LastRecieved = 2;
+}
+
+message LocationDatabase{
+  repeated LocationMessage locationMessage =1;
 }

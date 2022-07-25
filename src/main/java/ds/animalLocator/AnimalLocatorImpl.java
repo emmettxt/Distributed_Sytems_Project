@@ -29,6 +29,11 @@ public final class AnimalLocatorImpl {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_animalLocator_LocationResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_animalLocator_LocationDatabase_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_animalLocator_LocationDatabase_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -46,11 +51,12 @@ public final class AnimalLocatorImpl {
       "\001(\0132\032.google.protobuf.Timestamp\"_\n\020Locat" +
       "ionResponse\022\025\n\rcountRecieved\030\001 \001(\005\0224\n\014La" +
       "stRecieved\030\002 \001(\0132\036.animalLocator.Locatio" +
-      "nMessage2g\n\ranimalLocator\022V\n\017LocationUpd" +
-      "ater\022\036.animalLocator.LocationMessage\032\037.a" +
-      "nimalLocator.LocationResponse\"\000(\001B\'\n\020ds." +
-      "animalLocatorB\021AnimalLocatorImplP\001b\006prot" +
-      "o3"
+      "nMessage\"K\n\020LocationDatabase\0227\n\017location" +
+      "Message\030\001 \003(\0132\036.animalLocator.LocationMe" +
+      "ssage2g\n\ranimalLocator\022V\n\017LocationUpdate" +
+      "r\022\036.animalLocator.LocationMessage\032\037.anim" +
+      "alLocator.LocationResponse\"\000(\001B\'\n\020ds.ani" +
+      "malLocatorB\021AnimalLocatorImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -83,6 +89,12 @@ public final class AnimalLocatorImpl {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_animalLocator_LocationResponse_descriptor,
         new java.lang.String[] { "CountRecieved", "LastRecieved", });
+    internal_static_animalLocator_LocationDatabase_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_animalLocator_LocationDatabase_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_animalLocator_LocationDatabase_descriptor,
+        new java.lang.String[] { "LocationMessage", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 
