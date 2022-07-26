@@ -3,7 +3,8 @@ package ds.animalLocator;
 import ds.animalLocator.animalLocatorGrpc.animalLocatorImplBase;
 
 import java.io.IOException;
-import java.util.Collection;
+
+import com.google.protobuf.InvalidProtocolBufferException;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -11,10 +12,17 @@ import io.grpc.internal.Stream;
 import io.grpc.stub.StreamObserver;
 
 public class AnimalLocatorServer extends animalLocatorImplBase {
-    Collection<LocationMessage> locationMessages;
-    AnimalLocatorServer() throws IOException{
-        locationMessages = AnimalLocatorUtil.parseLocations(AnimalLocatorUtil.getDefaultLocationsFile());
+    LocationDatabase locationDatabase;
+
+    AnimalLocatorServer() throws IOException {
+        getLocationData();
     }
+    /* reads location data from file */
+
+    private void getLocationData() throws IOException {
+        locationDatabase = AnimalLocatorUtil.parseLocations(AnimalLocatorUtil.getDefaultLocationsPath());
+    }
+
     public static void main(String[] args) throws IOException {
         AnimalLocatorServer animalLocatorServer = new AnimalLocatorServer();
         int port = 50051;
@@ -39,38 +47,47 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
         }
 
     }
-    private void addLocation(LocationMessage locationMessage){
-        locationMessages.add(locationMessage);
-        
-    }
-    private LocationMessage lastLocation(String animalId){
-        LocationMessage lastLocation = null;
-        for(LocationMessage l : locationMessages){
 
-            if(l.getAnimalId().equals(animalId)){
-                if(lastLocation == null){
+    private LocationMessage lastLocation(String animalId) {
+        LocationMessage lastLocation = null;
+        for (LocationMessage l : locationDatabase.getLocationMessageList()) {
+
+            if (l.getAnimalId().equals(animalId)) {
+                if (lastLocation == null) {
                     lastLocation = l;
-                }else if(lastLocation.getTime().getNanos() < l.getTime().getNanos() ){
+                } else if (lastLocation.getTime().getNanos() < l.getTime().getNanos()) {
                     lastLocation = l;
                 }
             }
         }
         return lastLocation;
     }
+
+    // add locationMessage to locationMessages and sends to file
+    private void newLocationMessage(LocationMessage locationMessage) {
+        locationDatabase = LocationDatabase
+                .newBuilder()
+                .addAllLocationMessage(locationDatabase.getLocationMessageList()) // all previous data
+                .addLocationMessage(locationMessage).build(); // newest data
+    }
+
     @Override
     public StreamObserver<LocationMessage> locationUpdater(StreamObserver<LocationResponse> responseObserver) {
-        
+
         return new StreamObserver<LocationMessage>() {
             int locationCount = 0;
             LocationMessage latest;
 
             @Override
             public void onNext(LocationMessage locationMessage) {
-                System.out.print("OnNext");
-                addLocation(locationMessage);
+                System.out.println("OnNext");
+
+                //add location to database object
+                newLocationMessage(locationMessage);
+
                 locationCount++;
                 latest = locationMessage;
-                
+
                 System.out.println("receiving location, lon: " + locationMessage.getPoint().getLongitude() + " lat: "
                         + locationMessage.getPoint().getLatitude());
 
@@ -84,6 +101,14 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
 
             @Override
             public void onCompleted() {
+
+                //writes locations to database
+                try {
+                    AnimalLocatorUtil.writeLocationToDB(locationDatabase);
+                } catch (InvalidProtocolBufferException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
                 System.out.println("receiving locationUpdater method complete");
                 LocationResponse response = LocationResponse.newBuilder().setCountRecieved(locationCount)
                         .setLastRecieved(latest).build();
@@ -95,15 +120,5 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
             }
         };
     }
-
-    // public void testSimple(Point point, StreamObserver<Point> responseObserver) {
-    //     System.out.println("Recieveing Point, Long: " + point.getLongitude() + " ,Lat: " + point.getLatitude());
-
-    //     Point reply = Point.newBuilder().setLatitude(44).setLongitude(88).build();
-
-    //     responseObserver.onNext(reply);
-    //     responseObserver.onCompleted();
-
-    // }
 
 }
