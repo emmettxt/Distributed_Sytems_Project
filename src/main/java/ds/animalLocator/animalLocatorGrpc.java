@@ -62,6 +62,38 @@ public final class animalLocatorGrpc {
      return getLocationUpdaterMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<ds.animalLocator.EmptyMessage,
+      ds.animalLocator.LocationMessage> getCurrentHeardLocationMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CurrentHeardLocation",
+      requestType = ds.animalLocator.EmptyMessage.class,
+      responseType = ds.animalLocator.LocationMessage.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+  public static io.grpc.MethodDescriptor<ds.animalLocator.EmptyMessage,
+      ds.animalLocator.LocationMessage> getCurrentHeardLocationMethod() {
+    io.grpc.MethodDescriptor<ds.animalLocator.EmptyMessage, ds.animalLocator.LocationMessage> getCurrentHeardLocationMethod;
+    if ((getCurrentHeardLocationMethod = animalLocatorGrpc.getCurrentHeardLocationMethod) == null) {
+      synchronized (animalLocatorGrpc.class) {
+        if ((getCurrentHeardLocationMethod = animalLocatorGrpc.getCurrentHeardLocationMethod) == null) {
+          animalLocatorGrpc.getCurrentHeardLocationMethod = getCurrentHeardLocationMethod = 
+              io.grpc.MethodDescriptor.<ds.animalLocator.EmptyMessage, ds.animalLocator.LocationMessage>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+              .setFullMethodName(generateFullMethodName(
+                  "animalLocator.animalLocator", "CurrentHeardLocation"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ds.animalLocator.EmptyMessage.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ds.animalLocator.LocationMessage.getDefaultInstance()))
+                  .setSchemaDescriptor(new animalLocatorMethodDescriptorSupplier("CurrentHeardLocation"))
+                  .build();
+          }
+        }
+     }
+     return getCurrentHeardLocationMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -102,6 +134,13 @@ public final class animalLocatorGrpc {
       return asyncUnimplementedStreamingCall(getLocationUpdaterMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void currentHeardLocation(ds.animalLocator.EmptyMessage request,
+        io.grpc.stub.StreamObserver<ds.animalLocator.LocationMessage> responseObserver) {
+      asyncUnimplementedUnaryCall(getCurrentHeardLocationMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -111,6 +150,13 @@ public final class animalLocatorGrpc {
                 ds.animalLocator.LocationMessage,
                 ds.animalLocator.LocationResponse>(
                   this, METHODID_LOCATION_UPDATER)))
+          .addMethod(
+            getCurrentHeardLocationMethod(),
+            asyncServerStreamingCall(
+              new MethodHandlers<
+                ds.animalLocator.EmptyMessage,
+                ds.animalLocator.LocationMessage>(
+                  this, METHODID_CURRENT_HEARD_LOCATION)))
           .build();
     }
   }
@@ -146,6 +192,14 @@ public final class animalLocatorGrpc {
       return asyncClientStreamingCall(
           getChannel().newCall(getLocationUpdaterMethod(), getCallOptions()), responseObserver);
     }
+
+    /**
+     */
+    public void currentHeardLocation(ds.animalLocator.EmptyMessage request,
+        io.grpc.stub.StreamObserver<ds.animalLocator.LocationMessage> responseObserver) {
+      asyncServerStreamingCall(
+          getChannel().newCall(getCurrentHeardLocationMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -167,6 +221,14 @@ public final class animalLocatorGrpc {
     protected animalLocatorBlockingStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new animalLocatorBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public java.util.Iterator<ds.animalLocator.LocationMessage> currentHeardLocation(
+        ds.animalLocator.EmptyMessage request) {
+      return blockingServerStreamingCall(
+          getChannel(), getCurrentHeardLocationMethod(), getCallOptions(), request);
     }
   }
 
@@ -192,7 +254,8 @@ public final class animalLocatorGrpc {
     }
   }
 
-  private static final int METHODID_LOCATION_UPDATER = 0;
+  private static final int METHODID_CURRENT_HEARD_LOCATION = 0;
+  private static final int METHODID_LOCATION_UPDATER = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -211,6 +274,10 @@ public final class animalLocatorGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_CURRENT_HEARD_LOCATION:
+          serviceImpl.currentHeardLocation((ds.animalLocator.EmptyMessage) request,
+              (io.grpc.stub.StreamObserver<ds.animalLocator.LocationMessage>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -276,6 +343,7 @@ public final class animalLocatorGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new animalLocatorFileDescriptorSupplier())
               .addMethod(getLocationUpdaterMethod())
+              .addMethod(getCurrentHeardLocationMethod())
               .build();
         }
       }

@@ -50,8 +50,8 @@ public class AnimalLocatorUtil {
     }
 
     public static void writeLocationToDB(LocationDatabase locationDatabase, String path) throws InvalidProtocolBufferException {
+        System.out.println("Writing locations to Database...");
         String json = JsonFormat.printer().print(locationDatabase);
-        System.out.println(json);
         try {
             PrintWriter printWriter = new PrintWriter(new FileWriter(path));
             printWriter.write(json);

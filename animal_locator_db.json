@@ -13,5 +13,187 @@
     },
     "AnimalId": "AnimalID_2",
     "Time": "2022-07-26T08:55:38.692Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T10:32:33.722Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T10:32:33.722Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T11:18:51.882Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T11:18:51.882Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T11:23:20.506Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T11:23:20.506Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T11:50:53.685Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T11:50:53.685Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T11:51:56.810Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T11:51:56.810Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T11:53:11.554Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T11:53:11.554Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T12:00:05.484Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T12:00:05.484Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T12:00:51.551Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T12:00:51.551Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T12:05:19.020Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T12:05:19.020Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T12:07:24.973Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T12:07:24.973Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T12:13:07.588Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T12:13:07.588Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T12:14:43.311Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T12:14:43.311Z"
+  }, {
+    "point": {
+      "latitude": 55,
+      "longitude": 25
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-07-26T12:20:56.982Z"
+  }, {
+    "point": {
+      "latitude": 56,
+      "longitude": 26
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-07-26T12:20:56.982Z"
   }]
 }

@@ -1,12 +1,16 @@
 package ds.animalLocator;
 
+import java.util.Iterator;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Timestamp;
+import com.google.protobuf.util.JsonFormat;
 
 import ds.animalLocator.animalLocatorGrpc.animalLocatorBlockingStub;
 import ds.animalLocator.animalLocatorGrpc.animalLocatorStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.internal.Stream;
 import io.grpc.stub.StreamObserver;
 
 public class AnimalLocatorClient {
@@ -25,6 +29,12 @@ public class AnimalLocatorClient {
         asynStub = animalLocatorGrpc.newStub(channel);
 
         locationUpdate();
+        try {
+            getCurrentHeardLocation();
+        } catch (InvalidProtocolBufferException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         System.out.println("End Main");
     }
 
@@ -71,17 +81,28 @@ public class AnimalLocatorClient {
                     LocationMessage
                             .newBuilder()
                             .setAnimalId("AnimalID_2")
-                            .setPoint(point1)
+                            .setPoint(point2)
                             .setTime(timestamp)
                             .build());
             Thread.sleep(500);
 
             requestObserver.onCompleted();
-			Thread.sleep(10000);
+            Thread.sleep(10000);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public static void getCurrentHeardLocation() throws InvalidProtocolBufferException {
+        EmptyMessage emptyMessage = EmptyMessage.newBuilder().build();
+        Iterator<LocationMessage> locationmessages;
+        locationmessages = blockingStub.currentHeardLocation(emptyMessage);
+        while (locationmessages.hasNext()) {
+            LocationMessage l = locationmessages.next();
+            String time = JsonFormat.printer().print(l.getTime());
+            System.out.println("Latest Location for: " + l.getAnimalId() + " - Long: " + l.getPoint().getLongitude()
+                    + " Lat: " + l.getPoint().getLatitude() + " @ " +  time);
+        }
     }
 }

@@ -12,6 +12,12 @@ service animalLocator {
   //stream of LocationMesssages from client, server should return last recieved message.
   rpc LocationUpdater(stream LocationMessage) returns (LocationResponse) {}
 
+  //returns stream of latest location for each unique animalid in db
+  //need to send empty message 
+  rpc CurrentHeardLocation(EmptyMessage) returns(stream LocationMessage){}
+
+  rpc LastNLocations(HeardMemeberNMessage) returns(stream LocationMessage){}
+
 }
 
 message Point {
@@ -32,4 +38,7 @@ message LocationResponse{
 
 message LocationDatabase{
   repeated LocationMessage locationMessage =1;
+}
+message EmptyMessage{
+
 }
