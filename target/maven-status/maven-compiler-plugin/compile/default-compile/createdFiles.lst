@@ -5,10 +5,13 @@ ds\animalLocator\LocationMessageOrBuilder.class
 ds\animalLocator\animalLocatorGrpc$animalLocatorImplBase.class
 ds\animalLocator\Point$Builder.class
 ds\animalLocator\Point$1.class
+ds\animalLocator\HeardMemeberNMessage$1.class
+ds\animalLocator\HeardMemeberNMessage$Builder.class
 ds\animalLocator\LocationResponseOrBuilder.class
 ds\animalLocator\animalLocatorGrpc$animalLocatorMethodDescriptorSupplier.class
 ds\animalLocator\animalLocatorGrpc.class
 ds\animalLocator\Point.class
+ds\animalLocator\HeardMemeberNMessageOrBuilder.class
 ds\animalLocator\LocationMessage$1.class
 ds\animalLocator\animalLocatorGrpc$animalLocatorStub.class
 ds\animalLocator\animalLocatorGrpc$animalLocatorFileDescriptorSupplier.class
@@ -17,5 +20,6 @@ ds\animalLocator\LocationMessage$Builder.class
 ds\animalLocator\AnimalLocatorClient.class
 ds\animalLocator\animalLocatorGrpc$animalLocatorFutureStub.class
 ds\animalLocator\animalLocatorGrpc$animalLocatorBlockingStub.class
+ds\animalLocator\HeardMemeberNMessage.class
 ds\animalLocator\LocationMessage.class
 ds\animalLocator\PointOrBuilder.class

@@ -39,6 +39,11 @@ public final class AnimalLocatorImpl {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_animalLocator_EmptyMessage_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_animalLocator_HeardMemeberNMessage_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_animalLocator_HeardMemeberNMessage_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -58,13 +63,17 @@ public final class AnimalLocatorImpl {
       "stRecieved\030\002 \001(\0132\036.animalLocator.Locatio" +
       "nMessage\"K\n\020LocationDatabase\0227\n\017location" +
       "Message\030\001 \003(\0132\036.animalLocator.LocationMe" +
-      "ssage\"\016\n\014EmptyMessage2\300\001\n\ranimalLocator\022" +
-      "V\n\017LocationUpdater\022\036.animalLocator.Locat" +
-      "ionMessage\032\037.animalLocator.LocationRespo" +
-      "nse\"\000(\001\022W\n\024CurrentHeardLocation\022\033.animal" +
-      "Locator.EmptyMessage\032\036.animalLocator.Loc" +
-      "ationMessage\"\0000\001B\'\n\020ds.animalLocatorB\021An" +
-      "imalLocatorImplP\001b\006proto3"
+      "ssage\"\016\n\014EmptyMessage\"3\n\024HeardMemeberNMe" +
+      "ssage\022\020\n\010animalId\030\001 \001(\t\022\t\n\001N\030\002 \001(\0052\233\002\n\ra" +
+      "nimalLocator\022V\n\017LocationUpdater\022\036.animal" +
+      "Locator.LocationMessage\032\037.animalLocator." +
+      "LocationResponse\"\000(\001\022W\n\024CurrentHeardLoca" +
+      "tion\022\033.animalLocator.EmptyMessage\032\036.anim" +
+      "alLocator.LocationMessage\"\0000\001\022Y\n\016LastNLo" +
+      "cations\022#.animalLocator.HeardMemeberNMes" +
+      "sage\032\036.animalLocator.LocationMessage\"\0000\001" +
+      "B\'\n\020ds.animalLocatorB\021AnimalLocatorImplP" +
+      "\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -109,6 +118,12 @@ public final class AnimalLocatorImpl {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_animalLocator_EmptyMessage_descriptor,
         new java.lang.String[] { });
+    internal_static_animalLocator_HeardMemeberNMessage_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_animalLocator_HeardMemeberNMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_animalLocator_HeardMemeberNMessage_descriptor,
+        new java.lang.String[] { "AnimalId", "N", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

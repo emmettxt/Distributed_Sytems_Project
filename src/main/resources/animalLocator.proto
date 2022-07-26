@@ -42,3 +42,7 @@ message LocationDatabase{
 message EmptyMessage{
 
 }
+message HeardMemeberNMessage{
+  string animalId = 1;
+  int32 N =2;
+}
