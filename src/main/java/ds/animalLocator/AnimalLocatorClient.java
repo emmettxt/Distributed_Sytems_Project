@@ -28,9 +28,15 @@ public class AnimalLocatorClient {
 
         asynStub = animalLocatorGrpc.newStub(channel);
 
-        locationUpdate();
+        // locationUpdate();
+        // try {
+        //     getCurrentHeardLocation();
+        // } catch (InvalidProtocolBufferException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
         try {
-            getCurrentHeardLocation();
+            getNLocations(50, "AnimalID_1");
         } catch (InvalidProtocolBufferException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -102,7 +108,26 @@ public class AnimalLocatorClient {
             LocationMessage l = locationmessages.next();
             String time = JsonFormat.printer().print(l.getTime());
             System.out.println("Latest Location for: " + l.getAnimalId() + " - Long: " + l.getPoint().getLongitude()
-                    + " Lat: " + l.getPoint().getLatitude() + " @ " +  time);
+                    + " Lat: " + l.getPoint().getLatitude() + " @ " + time);
         }
+    }
+
+    public static void getNLocations(int N, String animalId) throws InvalidProtocolBufferException {
+        HeardMemeberNMessage heardMemeberNMessage = HeardMemeberNMessage.newBuilder().setAnimalId(animalId).setN(N)
+                .build();
+        Iterator<LocationMessage> locationmessages;
+        locationmessages = blockingStub.lastNLocations(heardMemeberNMessage);
+
+        int count = 0;
+        System.out.println("Last " + N + " Locations for animalId: " + animalId);
+        while(locationmessages.hasNext()){
+            LocationMessage l = locationmessages.next();
+            count += 1;
+            String time = JsonFormat.printer().print(l.getTime());
+            System.out.println("Long: " + l.getPoint().getLongitude()
+                    + " Lat: " + l.getPoint().getLatitude() + " @ " + time);
+        }
+        System.out.println(count + " Locations available");
+
     }
 }

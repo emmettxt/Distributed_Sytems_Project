@@ -117,6 +117,7 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
         List<LocationMessage> sortedLocations = getSortedLocations(animalId);
         return sortedLocations.get(0);
     }
+    //get list of locations for a specified animal id, sorted in descending order by timestamp
     private List<LocationMessage> getSortedLocations(String animalId){
         System.out.println("Getting sorted locations for animalid: " + animalId);
         //predicate for filtering location db list for just this animalId
@@ -152,8 +153,8 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
     }
 
     @Override
-    public void currentHeardLocation(ds.animalLocator.EmptyMessage request,
-            io.grpc.stub.StreamObserver<ds.animalLocator.LocationMessage> responseObserver) {
+    public void currentHeardLocation(EmptyMessage request,
+            StreamObserver<ds.animalLocator.LocationMessage> responseObserver) {
         // get list of animalids
         ArrayList<String> uniqueAnimalIDs = getUniqueAnimalIDs();
         // get last location of each unique animal id and call onNext
@@ -162,4 +163,16 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
         }
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void lastNLocations(HeardMemeberNMessage request, StreamObserver<LocationMessage> responseObserver) {
+        List<LocationMessage> sortedLocations = getSortedLocations(request.getAnimalId());
+        //get the number of locations to send, if less than requested available
+        int n = Math.min(sortedLocations.size(), request.getN());
+        for(int i = 0; i< n; i++){
+            responseObserver.onNext(sortedLocations.get(i));
+        }
+        responseObserver.onCompleted();
+        
+    }   
 }
