@@ -2,10 +2,14 @@ package ds.animalLocator;
 
 import ds.animalLocator.animalLocatorGrpc.animalLocatorImplBase;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Properties;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -17,21 +21,23 @@ import io.grpc.ServerBuilder;
 import io.grpc.internal.Stream;
 import io.grpc.stub.StreamObserver;
 
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
+
 public class AnimalLocatorServer extends animalLocatorImplBase {
     LocationDatabase locationDatabase;
 
     AnimalLocatorServer() throws IOException {
         getLocationData();
     }
-    /* reads location data from file */
-
-    private void getLocationData() throws IOException {
-        locationDatabase = AnimalLocatorUtil.parseLocations(AnimalLocatorUtil.getDefaultLocationsPath());
-    }
 
     public static void main(String[] args) throws IOException {
         AnimalLocatorServer animalLocatorServer = new AnimalLocatorServer();
-        int port = 50051;
+
+		Properties prop = animalLocatorServer.getProperties();
+		animalLocatorServer.registerService(prop);
+
+		int port = Integer.valueOf( prop.getProperty("service_port") );// #.50051;
 
         try {
 
@@ -53,6 +59,72 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
         }
 
     }
+
+    /* reads location data from file */
+
+    private void getLocationData() throws IOException {
+        locationDatabase = AnimalLocatorUtil.parseLocations(AnimalLocatorUtil.getDefaultLocationsPath());
+    }
+
+    private Properties getProperties() {
+
+        Properties prop = null;
+
+        try (InputStream input = new FileInputStream("src/main/resources/animalLocator.properties")) {
+
+            prop = new Properties();
+
+            // load a properties file
+            prop.load(input);
+
+            // get the property value and print it out
+            System.out.println("Animal Locator Properties ...");
+            System.out.println("\t service_type: " + prop.getProperty("service_type"));
+            System.out.println("\t service_name: " + prop.getProperty("service_name"));
+            System.out.println("\t service_description: " + prop.getProperty("service_description"));
+            System.out.println("\t service_port: " + prop.getProperty("service_port"));
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return prop;
+    }
+
+    private  void registerService(Properties prop) {
+		
+        try {
+               // Create a JmDNS instance
+               JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+               
+               String service_type = prop.getProperty("service_type") ;//"_http._tcp.local.";
+               String service_name = prop.getProperty("service_name")  ;// "example";
+              // int service_port = 1234;
+               int service_port = Integer.valueOf( prop.getProperty("service_port") );// #.50051;
+
+               
+               String service_description_properties = prop.getProperty("service_description")  ;//"path=index.html";
+               
+               // Register a service
+               ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port, service_description_properties);
+               jmdns.registerService(serviceInfo);
+               
+               System.out.printf("registrering service with type %s and name %s \n", service_type, service_name);
+               
+               // Wait a bit
+               Thread.sleep(1000);
+
+               // Unregister all services
+               //jmdns.unregisterAllServices();
+
+           } catch (IOException e) {
+               System.out.println(e.getMessage());
+           } catch (InterruptedException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+           }
+       
+   }
 
     // add locationMessage to locationMessages and sends to file
     private void newLocationMessage(LocationMessage locationMessage) {
@@ -113,24 +185,26 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
     }
 
     // gets the latest location of for given animal id
-    private LocationMessage lastLocation(String animalId){
+    private LocationMessage lastLocation(String animalId) {
         List<LocationMessage> sortedLocations = getSortedLocations(animalId);
         return sortedLocations.get(0);
     }
-    //get list of locations for a specified animal id, sorted in descending order by timestamp
-    private List<LocationMessage> getSortedLocations(String animalId){
+
+    // get list of locations for a specified animal id, sorted in descending order
+    // by timestamp
+    private List<LocationMessage> getSortedLocations(String animalId) {
         System.out.println("Getting sorted locations for animalid: " + animalId);
-        //predicate for filtering location db list for just this animalId
+        // predicate for filtering location db list for just this animalId
         Predicate<LocationMessage> byAnimalID = locationMessage -> locationMessage.getAnimalId().equals(animalId);
-        //doing the filtering
+        // doing the filtering
         List<LocationMessage> animalLocations = locationDatabase.getLocationMessageList().stream().filter(byAnimalID)
-        .collect(Collectors.toList());
-        System.out.println("There are " + animalLocations.size() + " Locations for "  + animalId);
-        //sorting the animal list by timestamp
+                .collect(Collectors.toList());
+        System.out.println("There are " + animalLocations.size() + " Locations for " + animalId);
+        // sorting the animal list by timestamp
         animalLocations.sort(new Comparator<LocationMessage>() {
             public int compare(LocationMessage l1, LocationMessage l2) {
-                return Timestamps.compare(l2.getTime(),l1.getTime());
-                
+                return Timestamps.compare(l2.getTime(), l1.getTime());
+
             }
         });
 
@@ -167,12 +241,12 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
     @Override
     public void lastNLocations(HeardMemeberNMessage request, StreamObserver<LocationMessage> responseObserver) {
         List<LocationMessage> sortedLocations = getSortedLocations(request.getAnimalId());
-        //get the number of locations to send, if less than requested available
+        // get the number of locations to send, if less than requested available
         int n = Math.min(sortedLocations.size(), request.getN());
-        for(int i = 0; i< n; i++){
+        for (int i = 0; i < n; i++) {
             responseObserver.onNext(sortedLocations.get(i));
         }
         responseObserver.onCompleted();
-        
-    }   
+
+    }
 }
