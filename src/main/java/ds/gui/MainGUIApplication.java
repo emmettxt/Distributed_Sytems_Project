@@ -16,7 +16,12 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
+import com.google.protobuf.Timestamp;
+
 import ds.animalLocator.AnimalLocatorClient;
+import ds.animalLocator.LocationMessage;
+import ds.animalLocator.LocationResponse;
+import ds.animalLocator.Point;
 import ds.animalLocator.animalLocatorGrpc;
 import ds.animalLocator.animalLocatorGrpc.animalLocatorBlockingStub;
 import ds.animalLocator.animalLocatorGrpc.animalLocatorStub;
@@ -34,6 +39,8 @@ import javax.swing.JTextArea;
 // import ds.examples.maths.MathServiceGrpc.MathServiceStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.netty.shaded.io.netty.handler.codec.compression.FastLzFrameDecoder;
+import io.grpc.stub.StreamObserver;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -242,7 +249,9 @@ public class MainGUIApplication {
 		public JPanel servicePanel;
 		public String Label = "Animal Locator";
 		// TODO Enable AnimalLocatorClient
-		// private AnimalLocatorClient client = new AnimalLocatorClient();
+		private AnimalLocatorClient client = new AnimalLocatorClient();
+		StreamObserver<LocationResponse> locationUpdateResponseObserver;
+		StreamObserver<LocationMessage> locationUpdateRequestObserver;
 
 		AnimalLocatorPanel() {
 			// intialise panel and set visibilty
@@ -276,14 +285,102 @@ public class MainGUIApplication {
 			latitudeTextField.setColumns(2);
 			latitudeTextField.setEnabled(false);
 
+			JComboBox<String> animalIdComboBox = new JComboBox<String>();
+			animalIdComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "AnimalID_1",
+					"AnimalID_2", "AnimalID_3", "AnimalID_4" }));
+			animalIdComboBox.setEnabled(false);
+			locationUpdateJpanel.add(animalIdComboBox);
+
+			JButton sendButton = new JButton();
+			sendButton.setText("Send Location");
+			sendButton.setEnabled(false);
+			locationUpdateJpanel.add(sendButton);
+
+			JButton closeStreamButton = new JButton();
+			closeStreamButton.setText("Close Stream");
+			closeStreamButton.setEnabled(false);
+			locationUpdateJpanel.add(closeStreamButton);
+
 			newLocationStreamButton.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					latitudeTextField.setEnabled(true);
 					longitudeTextField.setEnabled(true);
+					animalIdComboBox.setEnabled(true);
+					sendButton.setEnabled(true);
+					closeStreamButton.setEnabled(true);
+					newLocationStreamButton.setEnabled(false);
+
+					locationUpdateResponseObserver = new StreamObserver<LocationResponse>() {
+
+						@Override
+						public void onNext(LocationResponse value) {
+							System.out.println("Received " + value.getCountRecieved() + " Locations");
+
+						}
+
+						@Override
+						public void onError(Throwable t) {
+							t.printStackTrace();
+
+						}
+
+						@Override
+						public void onCompleted() {
+							System.out.println("stream is completed ... ");
+
+						}
+
+					};
+					locationUpdateRequestObserver = client.getAsyncStub()
+							.locationUpdater(locationUpdateResponseObserver);
+
+				}
+
+			});
+
+			sendButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int lat = Integer.parseInt(latitudeTextField.getText());
+					int lon = Integer.parseInt(longitudeTextField.getText());
+					Point point = Point.newBuilder().setLatitude(lat).setLongitude(lon).build();
+
+					String animalId = animalIdComboBox.getSelectedItem().toString();
+
+					long millis = System.currentTimeMillis();
+					Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+							.setNanos((int) ((millis % 1000) * 1000000)).build();
+
+					LocationMessage locationMessage = LocationMessage.newBuilder().setAnimalId(animalId).setPoint(point)
+							.setTime(timestamp).build();
+					locationUpdateRequestObserver.onNext(locationMessage);
+
+					longitudeTextField.setText("");
+					latitudeTextField.setText("");
+
+				}
+
+			});
+
+			closeStreamButton.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					locationUpdateRequestObserver.onCompleted();
+
+					latitudeTextField.setEnabled(false);
+					longitudeTextField.setEnabled(false);
+					animalIdComboBox.setEnabled(false);
+					sendButton.setEnabled(false);
+					closeStreamButton.setEnabled(false);
+					newLocationStreamButton.setEnabled(true);
 
 
+
+					
 				}
 
 			});

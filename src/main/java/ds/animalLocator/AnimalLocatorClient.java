@@ -78,7 +78,6 @@ public class AnimalLocatorClient {
 
             @Override
             public void onError(Throwable t) {
-                t.printStackTrace();
             }
 
             @Override
@@ -205,7 +204,7 @@ public class AnimalLocatorClient {
             });
 
             // Wait a bit
-            Thread.sleep(5000);
+            Thread.sleep(1000);
 
             jmdns.close();
 
