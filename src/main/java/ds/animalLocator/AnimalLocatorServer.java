@@ -99,7 +99,6 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
                
                String service_type = prop.getProperty("service_type") ;//"_http._tcp.local.";
                String service_name = prop.getProperty("service_name")  ;// "example";
-              // int service_port = 1234;
                int service_port = Integer.valueOf( prop.getProperty("service_port") );// #.50051;
 
                
@@ -113,6 +112,8 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
                
                // Wait a bit
                Thread.sleep(1000);
+               System.out.println("Host Name: " +jmdns.getHostName());
+               System.out.println("Inet4Addresses: " + serviceInfo.getInetAddresses()[0]);
 
                // Unregister all services
                //jmdns.unregisterAllServices();
