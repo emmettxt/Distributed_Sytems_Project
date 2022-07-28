@@ -12,6 +12,9 @@ import javax.jmdns.ServiceListener;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
 
 import ds.animalLocator.AnimalLocatorClient;
 import ds.animalLocator.animalLocatorGrpc;
@@ -238,8 +241,8 @@ public class MainGUIApplication {
 	public class AnimalLocatorPanel {
 		public JPanel servicePanel;
 		public String Label = "Animal Locator";
-
-		private AnimalLocatorClient client = new AnimalLocatorClient();
+		// TODO Enable AnimalLocatorClient
+		// private AnimalLocatorClient client = new AnimalLocatorClient();
 
 		AnimalLocatorPanel() {
 			// intialise panel and set visibilty
@@ -261,21 +264,26 @@ public class MainGUIApplication {
 
 			JTextField longitudeTextField = new JTextField();
 			locationUpdateJpanel.add(longitudeTextField);
-			longitudeTextField.setColumns(10);
+			longitudeTextField.setColumns(2);
+			longitudeTextField.setEnabled(false);
 
 			// add label and field for latitude
 			JLabel latitudeLabel = new JLabel("Latitude");
 			locationUpdateJpanel.add(latitudeLabel);
-			
-			
+
 			JTextField latitudeTextField = new JTextField();
 			locationUpdateJpanel.add(latitudeTextField);
-			latitudeTextField.setColumns(10);
+			latitudeTextField.setColumns(2);
+			latitudeTextField.setEnabled(false);
 
 			newLocationStreamButton.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					latitudeTextField.setEnabled(true);
+					longitudeTextField.setEnabled(true);
+
+
 				}
 
 			});
