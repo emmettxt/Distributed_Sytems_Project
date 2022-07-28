@@ -237,5 +237,19 @@
     },
     "AnimalId": "AnimalID_2",
     "Time": "2022-07-28T17:55:34.630Z"
+  }, {
+    "point": {
+      "latitude": 6,
+      "longitude": 5
+    },
+    "AnimalId": "AnimalID_3",
+    "Time": "2022-07-28T19:18:09.004Z"
+  }, {
+    "point": {
+      "latitude": 111111,
+      "longitude": 5
+    },
+    "AnimalId": "AnimalID_3",
+    "Time": "2022-07-28T19:22:51.472Z"
   }]
 }

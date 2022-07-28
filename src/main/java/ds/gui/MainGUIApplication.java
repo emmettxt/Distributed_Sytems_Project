@@ -21,6 +21,7 @@ import com.google.protobuf.Timestamp;
 import com.google.protobuf.util.JsonFormat;
 
 import ds.animalLocator.AnimalLocatorClient;
+import ds.animalLocator.EmptyMessage;
 import ds.animalLocator.HeardMemeberNMessage;
 import ds.animalLocator.LocationMessage;
 import ds.animalLocator.LocationResponse;
@@ -108,7 +109,7 @@ public class MainGUIApplication {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Client - Service Controller");
-		frame.setBounds(100, 100, 500, 300);
+		// frame.setBounds(100, 100, 500, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		BoxLayout bl = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);
@@ -131,6 +132,8 @@ public class MainGUIApplication {
 				for (int i = 0; i < servicePanels.length; i++) {
 					servicePanels[i].setVisible(index == i);
 				}
+				frame.pack();
+
 			}
 
 			// add service panels to frame
@@ -138,6 +141,7 @@ public class MainGUIApplication {
 				for (JPanel panel : servicePanels) {
 					frame.add(panel);
 				}
+				frame.pack();
 			}
 
 		}
@@ -180,70 +184,70 @@ public class MainGUIApplication {
 		panel_service_selector.add(service3Button);
 
 		servicePanels.addservicePanels();
+		{
+			// JPanel panel_service_1 = new JPanel();
+			// frame.getContentPane().add(panel_service_1);
+			// panel_service_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		// JPanel panel_service_1 = new JPanel();
-		// frame.getContentPane().add(panel_service_1);
-		// panel_service_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+			// JLabel lblNewLabel_1 = new JLabel("Longitude");
+			// panel_service_1.add(lblNewLabel_1);
 
-		// JLabel lblNewLabel_1 = new JLabel("Longitude");
-		// panel_service_1.add(lblNewLabel_1);
+			// textNumber1 = new JTextField();
+			// panel_service_1.add(textNumber1);
+			// textNumber1.setColumns(10);
 
-		// textNumber1 = new JTextField();
-		// panel_service_1.add(textNumber1);
-		// textNumber1.setColumns(10);
+			// JLabel lblNewLabel_2 = new JLabel("Latitude");
+			// panel_service_1.add(lblNewLabel_2);
 
-		// JLabel lblNewLabel_2 = new JLabel("Latitude");
-		// panel_service_1.add(lblNewLabel_2);
+			// textNumber2 = new JTextField();
+			// panel_service_1.add(textNumber2);
+			// textNumber2.setColumns(10);
 
-		// textNumber2 = new JTextField();
-		// panel_service_1.add(textNumber2);
-		// textNumber2.setColumns(10);
+			// JComboBox comboOperation = new JComboBox();
+			// comboOperation.setModel(new DefaultComboBoxModel(new String[] {"ADDITION",
+			// "SUBTRACTION", "MULTIPLICATION", "DIVISION"}));
+			// panel_service_1.add(comboOperation);
 
-		// JComboBox comboOperation = new JComboBox();
-		// comboOperation.setModel(new DefaultComboBoxModel(new String[] {"ADDITION",
-		// "SUBTRACTION", "MULTIPLICATION", "DIVISION"}));
-		// panel_service_1.add(comboOperation);
+			// JButton btnCalculate = new JButton("Calculate");
+			// btnCalculate.addActionListener(new ActionListener() {
+			// public void actionPerformed(ActionEvent e) {
 
-		// JButton btnCalculate = new JButton("Calculate");
-		// btnCalculate.addActionListener(new ActionListener() {
-		// public void actionPerformed(ActionEvent e) {
+			// int num1 = Integer.parseInt(textNumber1.getText());
+			// int num2 = Integer.parseInt(textNumber2.getText());
 
-		// int num1 = Integer.parseInt(textNumber1.getText());
-		// int num2 = Integer.parseInt(textNumber2.getText());
+			// int index = comboOperation.getSelectedIndex();
+			// // Operation operation = Operation.forNumber(index);
 
-		// int index = comboOperation.getSelectedIndex();
-		// // Operation operation = Operation.forNumber(index);
+			// // CalculateRequest req =
+			// CalculateRequest.newBuilder().setNumber1(num1).setNumber2(num2).setOperation(operation).build();
 
-		// // CalculateRequest req =
-		// CalculateRequest.newBuilder().setNumber1(num1).setNumber2(num2).setOperation(operation).build();
+			// // CalculateResponse response = blockingStub.calculate(req);
 
-		// // CalculateResponse response = blockingStub.calculate(req);
+			// //textResponse.append("reply:"+ response.getResult() + " mes:"+
+			// response.getMessage() + "\n");
 
-		// //textResponse.append("reply:"+ response.getResult() + " mes:"+
-		// response.getMessage() + "\n");
+			// // System.out.println("res: " + response.getResult() + " mes: " +
+			// response.getMessage());
 
-		// // System.out.println("res: " + response.getResult() + " mes: " +
-		// response.getMessage());
+			// }
+			// });
+			// panel_service_1.add(btnCalculate);
 
-		// }
-		// });
-		// panel_service_1.add(btnCalculate);
+			// textResponse = new JTextArea(3, 20);
+			// textResponse .setLineWrap(true);
+			// textResponse.setWrapStyleWord(true);
 
-		// textResponse = new JTextArea(3, 20);
-		// textResponse .setLineWrap(true);
-		// textResponse.setWrapStyleWord(true);
+			// JScrollPane scrollPane = new JScrollPane(textResponse);
 
-		// JScrollPane scrollPane = new JScrollPane(textResponse);
+			// //textResponse.setSize(new Dimension(15, 30));
+			// panel_service_1.add(scrollPane);
 
-		// //textResponse.setSize(new Dimension(15, 30));
-		// panel_service_1.add(scrollPane);
+			// JPanel panel_service_2 = new JPanel();
+			// frame.getContentPane().add(panel_service_2);
 
-		// JPanel panel_service_2 = new JPanel();
-		// frame.getContentPane().add(panel_service_2);
-
-		// JPanel panel_service_3 = new JPanel();
-		// frame.getContentPane().add(panel_service_3);
-
+			// JPanel panel_service_3 = new JPanel();
+			// frame.getContentPane().add(panel_service_3);
+		}
 	}
 
 	/**
@@ -264,6 +268,7 @@ public class MainGUIApplication {
 			servicePanel.setLayout(new BoxLayout(servicePanel, BoxLayout.Y_AXIS));
 			servicePanel.add(locationUpdatePanel());
 			servicePanel.add(LastNLocationsPanel());
+			servicePanel.add(CurrentHeardLocationPanel());
 		}
 
 		private JPanel locationUpdatePanel() {
@@ -408,8 +413,8 @@ public class MainGUIApplication {
 			JTextArea textResponse = new JTextArea(3, 20);
 			textResponse.setLineWrap(true);
 			textResponse.setWrapStyleWord(true);
+			textResponse.setEditable(false);
 			JScrollPane scrollPane = new JScrollPane(textResponse);
-			// textResponse.setSize(new Dimension(15, 30));
 			lastNLocationsPanel.add(scrollPane);
 
 			lstNLocationsButton.addActionListener(new ActionListener() {
@@ -443,37 +448,51 @@ public class MainGUIApplication {
 			lastNLocationsPanel.add(lstNLocationsButton);
 			return lastNLocationsPanel;
 		}
-	}
 
-	private JPanel service1Initialise() {
+		private JPanel CurrentHeardLocationPanel() {
+			JPanel currentHeardLocPanel = new JPanel();
 
-		JPanel panel_service_1 = new JPanel();
+			JButton currentHeardLocButton = new JButton("Current Heard Location");
+			currentHeardLocPanel.add(currentHeardLocButton);
 
-		JPanel panel_LocationUpdate = locationUpdateJpanel();
+			JTextArea textResponse = new JTextArea(3, 20);
+			textResponse.setLineWrap(true);
+			textResponse.setWrapStyleWord(true);
+			textResponse.setEditable(false);
+			JScrollPane scrollPane = new JScrollPane(textResponse);
+			currentHeardLocPanel.add(scrollPane);
 
-		// JLabel lblNewLabel_1 = new JLabel("Service 1 Label");
+			currentHeardLocButton.addActionListener(new ActionListener() {
 
-		panel_service_1.add(panel_LocationUpdate);
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					textResponse.setText("");
+					EmptyMessage emptyMessage = EmptyMessage.newBuilder().build();
+					Iterator<LocationMessage> locationmessages;
+					locationmessages = client.getBlockingStub().currentHeardLocation(emptyMessage);
+					while (locationmessages.hasNext()) {
+						LocationMessage l = locationmessages.next();
+						String time;
+						try {
+							time = JsonFormat.printer().print(l.getTime());
+						} catch (InvalidProtocolBufferException e1) {
+							// TODO Auto-generated catch block
+							time = l.getTime().toString();
+						}
+						textResponse.append(
+								l.getAnimalId() + ": \n\t"
+										+ "Long: " + l.getPoint().getLongitude()
+										+ " Lat: " + l.getPoint().getLatitude()
+										+ "\n\t" + time + "\n");
 
-		panel_service_1.setVisible(false);
+					}
 
-		return panel_service_1;
+				}
 
-	}
+			});
 
-	// panel to run locationUpdate method
-	private JPanel locationUpdateJpanel() {
-		JPanel locationUpdateJpanel = new JPanel();
-		JButton service3Button = new JButton("New Location Stream");
-		service3Button.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			}
-
-		});
-		locationUpdateJpanel.add(service3Button);
-		return locationUpdateJpanel;
+			return currentHeardLocPanel;
+		}
 	}
 
 	private JPanel service2Initialise() {
