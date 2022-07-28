@@ -16,9 +16,12 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Timestamp;
+import com.google.protobuf.util.JsonFormat;
 
 import ds.animalLocator.AnimalLocatorClient;
+import ds.animalLocator.HeardMemeberNMessage;
 import ds.animalLocator.LocationMessage;
 import ds.animalLocator.LocationResponse;
 import ds.animalLocator.Point;
@@ -46,6 +49,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 
 public class MainGUIApplication {
@@ -365,7 +369,7 @@ public class MainGUIApplication {
 
 			});
 
-			closeStreamButton.addActionListener(new ActionListener(){
+			closeStreamButton.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -378,9 +382,6 @@ public class MainGUIApplication {
 					closeStreamButton.setEnabled(false);
 					newLocationStreamButton.setEnabled(true);
 
-
-
-					
 				}
 
 			});
@@ -388,17 +389,59 @@ public class MainGUIApplication {
 		}
 
 		private JPanel LastNLocationsPanel() {
-			JPanel panel = new JPanel();
-			JButton button = new JButton("Last N Locations");
-			button.addActionListener(new ActionListener() {
+			JPanel lastNLocationsPanel = new JPanel();
+			JButton lstNLocationsButton = new JButton("Last N Locations");
+
+			JComboBox<String> animalIdComboBox = new JComboBox<String>();
+			animalIdComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "AnimalID_1",
+					"AnimalID_2", "AnimalID_3", "AnimalID_4" }));
+			lastNLocationsPanel.add(animalIdComboBox);
+
+			// add label and field for n
+			JLabel nLabel = new JLabel("N");
+			lastNLocationsPanel.add(nLabel);
+			JTextField nTextField = new JTextField();
+			lastNLocationsPanel.add(nTextField);
+			nTextField.setColumns(2);
+
+			// text area for result
+			JTextArea textResponse = new JTextArea(3, 20);
+			textResponse.setLineWrap(true);
+			textResponse.setWrapStyleWord(true);
+			JScrollPane scrollPane = new JScrollPane(textResponse);
+			// textResponse.setSize(new Dimension(15, 30));
+			lastNLocationsPanel.add(scrollPane);
+
+			lstNLocationsButton.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					textResponse.setText("");
+					String animalId = animalIdComboBox.getSelectedItem().toString();
+					int n = Integer.parseInt(nTextField.getText());
+					HeardMemeberNMessage heardMemeberNMessage = HeardMemeberNMessage.newBuilder().setAnimalId(animalId)
+							.setN(n).build();
+					Iterator<LocationMessage> locationMessages = client.getBlockingStub()
+							.lastNLocations(heardMemeberNMessage);
+					while (locationMessages.hasNext()) {
+						LocationMessage l = locationMessages.next();
+						String time;
+						try {
+							time = JsonFormat.printer().print(l.getTime());
+						} catch (InvalidProtocolBufferException t) {
+							time = l.getTime().toString();
+						}
+						textResponse.append("Long: " + l.getPoint().getLongitude()
+								+ " Lat: " + l.getPoint().getLatitude() + " @ " + time + "\n");
+
+					}
+
 				}
 
 			});
-			panel.add(button);
-			return panel;
+
+			lastNLocationsPanel.add(lstNLocationsButton);
+			return lastNLocationsPanel;
 		}
 	}
 
