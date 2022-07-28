@@ -266,6 +266,8 @@ public class MainGUIApplication {
 			// add label and field for latitude
 			JLabel latitudeLabel = new JLabel("Latitude");
 			locationUpdateJpanel.add(latitudeLabel);
+			longitudeTextField.setColumns(10);
+
 
 			JTextField latitudeTextField = new JTextField();
 			locationUpdateJpanel.add(latitudeTextField);
