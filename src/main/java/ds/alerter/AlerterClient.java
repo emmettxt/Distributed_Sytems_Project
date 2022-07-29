@@ -3,6 +3,7 @@ package ds.alerter;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Iterator;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
@@ -108,6 +109,17 @@ public class AlerterClient {
     }
 
   }
+  private void printCurrentAlerts(){
+    EmptyMessage emptyMessage = EmptyMessage.newBuilder().build();
+    Iterator<AlertDetails> currentAlerts;
+    currentAlerts = blockingStub.getCurrentAlerts(emptyMessage);
+    while(currentAlerts.hasNext()){
+      AlertDetails alertDetails = currentAlerts.next();
+      System.out.println("Id: " + alertDetails.getAlertId());
+      System.out.println("Priority: " + alertDetails.getAlertMessage().getPriorityLevel());
+      System.out.println("Description: " + alertDetails.getAlertMessage().getDescription());
+    }
+  }
 
   public static void main(String[] args) {
     AlerterClient alerterClient = new AlerterClient();
@@ -132,6 +144,9 @@ public class AlerterClient {
     System.out.println("Priority: " + alertDetails2.getAlertMessage().getPriorityLevel());
     System.out.println("Description: " + alertDetails2.getAlertMessage().getDescription() + "\n");
 
+    System.out.println("Current Alerts are:");
+    alerterClient.printCurrentAlerts();
+
     System.out.println("Clearing Alert with id: " + alertDetails2.getAlertId());
     AlertIdMessage alertIdMessage = AlertIdMessage.newBuilder().setAlertId(alertDetails2.getAlertId()).build();
     AlertDetails clearedAlert = alerterClient.blockingStub.clearAlert(alertIdMessage);
@@ -140,5 +155,10 @@ public class AlerterClient {
     System.out.println("Id: " + clearedAlert.getAlertId());
     System.out.println("Priority: " + clearedAlert.getAlertMessage().getPriorityLevel());
     System.out.println("Description: " + clearedAlert.getAlertMessage().getDescription() + "\n");
+
+
+    
+    System.out.println("Current Alerts are:");
+    alerterClient.printCurrentAlerts();
   }
 }
