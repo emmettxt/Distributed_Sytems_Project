@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ds.stockManager";
+option java_outer_classname = "StockManagerImpl";
+
+package stockmanager;
+
+service  stockManager{
+  //Stream of stock to be added each call returns the current levels of that paticular stock
+  rpc AddStock(Stream StockMessage) returns (Stream StockMessage){}
+
+  //Remove stock, retunr message is current level of that stock
+  rpc RemoveStock(StockMessage) returns(StockMessage){}
+
+  rpc StockSummary(EmptyStockMessage) returns (stream StockMessage){}
+}
+
+message StockMessage{
+  String stockType = 1;
+  double stockVolume =2;
+}
+
+message EmptyStockMessage{}
+
