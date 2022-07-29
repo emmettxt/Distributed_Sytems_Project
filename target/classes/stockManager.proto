@@ -8,7 +8,7 @@ package stockmanager;
 
 service  stockManager{
   //Stream of stock to be added each call returns the current levels of that paticular stock
-  rpc AddStock(Stream StockMessage) returns (Stream StockMessage){}
+  rpc AddStock(stream StockMessage) returns (stream StockMessage){}
 
   //Remove stock, retunr message is current level of that stock
   rpc RemoveStock(StockMessage) returns(StockMessage){}
