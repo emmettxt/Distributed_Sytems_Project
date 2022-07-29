@@ -20,6 +20,10 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Timestamp;
 import com.google.protobuf.util.JsonFormat;
 
+import ds.alerter.AlertDetails;
+import ds.alerter.AlertMessage;
+import ds.alerter.AlerterClient;
+import ds.alerter.AlertMessage.PriorityLevel;
 import ds.animalLocator.AnimalLocatorClient;
 import ds.animalLocator.EmptyMessage;
 import ds.animalLocator.HeardMemeberNMessage;
@@ -45,6 +49,8 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.netty.shaded.io.netty.handler.codec.compression.FastLzFrameDecoder;
 import io.grpc.stub.StreamObserver;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.Priority;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -78,22 +84,6 @@ public class MainGUIApplication {
 	 */
 	public MainGUIApplication() {
 
-		// String math_service_type = "_maths._tcp.local.";
-		// discoverMathService(math_service_type);
-
-		// String host = mathServiceInfo.getHostAddresses()[0];
-		// int port = mathServiceInfo.getPort();
-
-		// ManagedChannel channel = ManagedChannelBuilder
-		// .forAddress(host, port)
-		// .usePlaintext()
-		// .build();
-
-		// stubs -- generate from proto
-		// blockingStub = MathServiceGrpc.newBlockingStub(channel);
-
-		// asyncStub = MathServiceGrpc.newStub(channel);
-
 		initialize();
 	}
 
@@ -105,6 +95,7 @@ public class MainGUIApplication {
 
 	// }
 	AnimalLocatorPanel animalLocatorPanel = new AnimalLocatorPanel();
+	AlerterPanel alerterPanel = new AlerterPanel();
 
 	private void initialize() {
 		frame = new JFrame();
@@ -120,11 +111,9 @@ public class MainGUIApplication {
 		frame.getContentPane().add(panel_service_selector);
 		panel_service_selector.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		// JPanel servicePanels[] = new
-		// JPanel[]{service1Initialise(),service2Initialise(),service3Initialise()};
 		class ServicePanels {
 
-			private JPanel servicePanels[] = new JPanel[] { animalLocatorPanel.servicePanel, service2Initialise(),
+			private JPanel servicePanels[] = new JPanel[] { animalLocatorPanel.servicePanel, alerterPanel.servicePanel,
 					service3Initialise() };
 
 			public void toggleVisiblePanel(int index) {
@@ -158,7 +147,7 @@ public class MainGUIApplication {
 		});
 		panel_service_selector.add(service1Button);
 
-		JButton service2Button = new JButton("Service 2");
+		JButton service2Button = new JButton(alerterPanel.Label);
 		service2Button.addActionListener(new ActionListener() {
 
 			@Override
@@ -492,6 +481,58 @@ public class MainGUIApplication {
 			});
 
 			return currentHeardLocPanel;
+		}
+	}
+
+	public class AlerterPanel {
+		public JPanel servicePanel;
+		public String Label = "Alerter";
+		// TODO Enable AnimalLocatorClient
+		private AlerterClient client = new AlerterClient();
+
+		AlerterPanel() {
+			// intialise panel and set visibilty
+			servicePanel = new JPanel();
+			servicePanel.setVisible(false);
+			servicePanel.setLayout(new BoxLayout(servicePanel, BoxLayout.Y_AXIS));
+			servicePanel.add(newAlertPanel());
+			// servicePanel.add(LastNLocationsPanel());
+			// servicePanel.add(CurrentHeardLocationPanel());
+		}
+
+		private JPanel newAlertPanel() {
+			JPanel newAlertPanel = new JPanel();
+			JComboBox<PriorityLevel> priorityComboBox = new JComboBox<PriorityLevel>();
+			priorityComboBox.setModel(new DefaultComboBoxModel<PriorityLevel>(new PriorityLevel[]{PriorityLevel.HIGH,PriorityLevel.LOW,PriorityLevel.MEDIUM}));
+			newAlertPanel.add(priorityComboBox);
+
+			JTextArea alertDescTextArea = new JTextArea(3, 20);
+			alertDescTextArea.setLineWrap(true);
+			alertDescTextArea.setWrapStyleWord(true);
+			JScrollPane alertDescScrollPane = new JScrollPane(alertDescTextArea);
+			newAlertPanel.add(alertDescScrollPane);
+
+			JButton addAlertButton = new JButton("Add Alert");
+			newAlertPanel.add(addAlertButton);
+			addAlertButton.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String alertDescription = alertDescTextArea.getText();
+	    		System.out.println("Registering new Alert");
+					PriorityLevel priorityLevel= (PriorityLevel) priorityComboBox.getSelectedItem();
+
+					AlertMessage alertMessage = AlertMessage.newBuilder().setDescription(alertDescription).setPriorityLevel(priorityLevel).build();
+					alertDescTextArea.setText("");
+    			System.out.println("Priority: " + alertMessage.getPriorityLevel());
+    			System.out.println("Description: " + alertMessage.getDescription() + "\n");
+
+					AlertDetails alertDetails =  client.getBlockingStub().newAlert(alertMessage);
+
+					System.out.println("New Alert Registered, id: " + alertDetails.getAlertId());	
+				}
+			});
+			return newAlertPanel;
 		}
 	}
 
