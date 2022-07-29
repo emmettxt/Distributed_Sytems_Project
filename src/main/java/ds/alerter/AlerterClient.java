@@ -8,14 +8,12 @@ import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
-import javax.sound.midi.SysexMessage;
 
 import ds.alerter.AlertMessage.PriorityLevel;
 import ds.alerter.AlerterGrpc.AlerterBlockingStub;
 import ds.alerter.AlerterGrpc.AlerterStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import javafx.scene.control.Alert;
 
 public class AlerterClient {
   private AlerterBlockingStub blockingStub;

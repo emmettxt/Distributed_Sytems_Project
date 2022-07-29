@@ -2,15 +2,17 @@ ds\alerter\AlerterGrpc$AlerterMethodDescriptorSupplier.class
 ds\alerter\AlertMessage.class
 ds\alerter\AlertMessage$Builder.class
 ds\alerter\AlertMessage$1.class
-ds\alerter\AlerterImpl.class
 ds\alerter\AlertMessage$PriorityLevel.class
+ds\alerter\EmptyMessage$Builder.class
 ds\alerter\AlertDetails$1.class
 ds\alerter\AlerterGrpc$AlerterFutureStub.class
 ds\alerter\AlerterGrpc$AlerterImplBase.class
+ds\alerter\EmptyMessage.class
 ds\alerter\AlerterGrpc$1.class
 ds\alerter\AlerterGrpc$AlerterBaseDescriptorSupplier.class
 ds\alerter\AlertIdMessage$Builder.class
 ds\alerter\AlerterGrpc$MethodHandlers.class
+ds\alerter\EmptyMessageOrBuilder.class
 ds\animalLocator\animalLocatorGrpc$1.class
 ds\alerter\AlerterGrpc$AlerterBlockingStub.class
 ds\alerter\AlertDetails.class
@@ -21,6 +23,7 @@ ds\alerter\AlerterGrpc$AlerterFileDescriptorSupplier.class
 ds\alerter\AlertIdMessageOrBuilder.class
 ds\alerter\AlertIdMessage$1.class
 ds\alerter\AlerterGrpc.class
+ds\alerter\EmptyMessage$1.class
 ds\alerter\AlertIdMessage.class
 ds\alerter\AlerterGrpc$AlerterStub.class
 ds\alerter\AlerterImpl$1.class

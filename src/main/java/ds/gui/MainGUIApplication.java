@@ -5,16 +5,9 @@ package ds.gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.jmdns.JmDNS;
-import javax.jmdns.ServiceEvent;
-import javax.jmdns.ServiceInfo;
-import javax.jmdns.ServiceListener;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Timestamp;
@@ -30,9 +23,6 @@ import ds.animalLocator.HeardMemeberNMessage;
 import ds.animalLocator.LocationMessage;
 import ds.animalLocator.LocationResponse;
 import ds.animalLocator.Point;
-import ds.animalLocator.animalLocatorGrpc;
-import ds.animalLocator.animalLocatorGrpc.animalLocatorBlockingStub;
-import ds.animalLocator.animalLocatorGrpc.animalLocatorStub;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -41,21 +31,9 @@ import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
-// import ds.examples.maths.CalculateRequest.Operation;
-// import ds.examples.maths.MathServiceGrpc.MathServiceBlockingStub;
-// import ds.examples.maths.MathServiceGrpc.MathServiceStub;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.netty.shaded.io.netty.handler.codec.compression.FastLzFrameDecoder;
 import io.grpc.stub.StreamObserver;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.Priority;
 
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.awt.event.ActionEvent;
 
@@ -536,18 +514,7 @@ public class MainGUIApplication {
 		}
 	}
 
-	private JPanel service2Initialise() {
-		JPanel panel_service_1 = new JPanel();
-
-		JLabel lblNewLabel_1 = new JLabel("Service 2 Label");
-
-		panel_service_1.add(lblNewLabel_1);
-		panel_service_1.setVisible(false);
-
-		return panel_service_1;
-
-	}
-
+	
 	private JPanel service3Initialise() {
 		JPanel panel_service_1 = new JPanel();
 

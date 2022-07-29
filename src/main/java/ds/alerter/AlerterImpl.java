@@ -29,6 +29,11 @@ public final class AlerterImpl {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_alerter_AlertIdMessage_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_alerter_EmptyMessage_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_alerter_EmptyMessage_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -45,11 +50,13 @@ public final class AlerterImpl {
       "\001\022\007\n\003LOW\020\002\"L\n\014AlertDetails\022+\n\014alertMessa" +
       "ge\030\001 \001(\0132\025.alerter.AlertMessage\022\017\n\007alert" +
       "Id\030\002 \001(\005\"!\n\016AlertIdMessage\022\017\n\007alertId\030\001 " +
-      "\001(\0052\205\001\n\007Alerter\022:\n\010NewAlert\022\025.alerter.Al" +
-      "ertMessage\032\025.alerter.AlertDetails\"\000\022>\n\nC" +
-      "learAlert\022\027.alerter.AlertIdMessage\032\025.ale" +
-      "rter.AlertDetails\"\000B\033\n\nds.alerterB\013Alert" +
-      "erImplP\001b\006proto3"
+      "\001(\005\"\016\n\014EmptyMessage2\313\001\n\007Alerter\022:\n\010NewAl" +
+      "ert\022\025.alerter.AlertMessage\032\025.alerter.Ale" +
+      "rtDetails\"\000\022>\n\nClearAlert\022\027.alerter.Aler" +
+      "tIdMessage\032\025.alerter.AlertDetails\"\000\022D\n\020G" +
+      "etCurrentAlerts\022\025.alerter.EmptyMessage\032\025" +
+      ".alerter.AlertDetails\"\0000\001B\033\n\nds.alerterB" +
+      "\013AlerterImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -81,6 +88,12 @@ public final class AlerterImpl {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_alerter_AlertIdMessage_descriptor,
         new java.lang.String[] { "AlertId", });
+    internal_static_alerter_EmptyMessage_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_alerter_EmptyMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_alerter_EmptyMessage_descriptor,
+        new java.lang.String[] { });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -14,6 +14,8 @@ service Alerter {
   //clears and alert from server
   rpc ClearAlert(AlertIdMessage) returns (AlertDetails){}
 
+  rpc GetCurrentAlerts(EmptyMessage) returns(stream AlertDetails){}
+
 }
 
 message AlertMessage{
@@ -31,4 +33,7 @@ message AlertDetails {
 }
 message AlertIdMessage{
   int32 alertId = 1;
+}
+message EmptyMessage{
+  
 }
