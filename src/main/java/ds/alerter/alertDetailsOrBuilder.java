@@ -3,30 +3,25 @@
 
 package ds.alerter;
 
-public interface alertDetailsOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:alerter.alertDetails)
+public interface AlertDetailsOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:alerter.AlertDetails)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.alerter.alertMessage alertMessage = 1;</code>
+   * <code>.alerter.AlertMessage alertMessage = 1;</code>
    */
   boolean hasAlertMessage();
   /**
-   * <code>.alerter.alertMessage alertMessage = 1;</code>
+   * <code>.alerter.AlertMessage alertMessage = 1;</code>
    */
-  ds.alerter.alertMessage getAlertMessage();
+  ds.alerter.AlertMessage getAlertMessage();
   /**
-   * <code>.alerter.alertMessage alertMessage = 1;</code>
+   * <code>.alerter.AlertMessage alertMessage = 1;</code>
    */
-  ds.alerter.alertMessageOrBuilder getAlertMessageOrBuilder();
+  ds.alerter.AlertMessageOrBuilder getAlertMessageOrBuilder();
 
   /**
-   * <code>string alertId = 2;</code>
+   * <code>int32 alertId = 2;</code>
    */
-  java.lang.String getAlertId();
-  /**
-   * <code>string alertId = 2;</code>
-   */
-  com.google.protobuf.ByteString
-      getAlertIdBytes();
+  int getAlertId();
 }

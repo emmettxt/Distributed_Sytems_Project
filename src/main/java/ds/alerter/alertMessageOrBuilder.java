@@ -3,18 +3,18 @@
 
 package ds.alerter;
 
-public interface alertMessageOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:alerter.alertMessage)
+public interface AlertMessageOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:alerter.AlertMessage)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.alerter.alertMessage.PriorityLevel priorityLevel = 1;</code>
+   * <code>.alerter.AlertMessage.PriorityLevel priorityLevel = 1;</code>
    */
   int getPriorityLevelValue();
   /**
-   * <code>.alerter.alertMessage.PriorityLevel priorityLevel = 1;</code>
+   * <code>.alerter.AlertMessage.PriorityLevel priorityLevel = 1;</code>
    */
-  ds.alerter.alertMessage.PriorityLevel getPriorityLevel();
+  ds.alerter.AlertMessage.PriorityLevel getPriorityLevel();
 
   /**
    * <code>string description = 2;</code>

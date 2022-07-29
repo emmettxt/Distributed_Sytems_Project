@@ -3,17 +3,12 @@
 
 package ds.alerter;
 
-public interface alertIdMessageOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:alerter.alertIdMessage)
+public interface AlertIdMessageOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:alerter.AlertIdMessage)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string alertId = 1;</code>
+   * <code>int32 alertId = 1;</code>
    */
-  java.lang.String getAlertId();
-  /**
-   * <code>string alertId = 1;</code>
-   */
-  com.google.protobuf.ByteString
-      getAlertIdBytes();
+  int getAlertId();
 }

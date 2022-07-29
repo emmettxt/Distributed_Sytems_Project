@@ -4,16 +4,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceInfo;
 
-import ds.alerter.alerterGrpc.alerterImplBase;
+import ds.alerter.AlerterGrpc.AlerterImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.stub.StreamObserver;
 
-public class AlerterServer extends alerterImplBase {
+public class AlerterServer extends AlerterImplBase {
+  private ArrayList<AlertDetails> currentAlerts;
+  private int alertCount = 0;
+
   public static void main(String[] args) {
     AlerterServer alerterServer = new AlerterServer();
 
@@ -99,6 +104,31 @@ public class AlerterServer extends alerterImplBase {
       e.printStackTrace();
     }
 
+  }
+
+  public void newAlert(AlertMessage alertMessage, StreamObserver<AlertDetails> responsObserver) {
+    responsObserver.onNext(registerNewAlert(alertMessage));
+    responsObserver.onCompleted();
+  }
+
+  private AlertDetails registerNewAlert(AlertMessage alertMessage) {
+    AlertDetails alertDetails = AlertDetails.newBuilder().setAlertId(alertCount).setAlertMessage(alertMessage).build();
+    alertCount += 1;
+    currentAlerts.add(alertDetails);
+    return alertDetails;
+  }
+
+  private AlertDetails clearAlert(AlertIdMessage alertIdMessage) {
+    int id = alertIdMessage.getAlertId();
+    AlertDetails alertDetails;
+    for (int i = 0; i < currentAlerts.size(); i++) {
+      if (currentAlerts.get(i).getAlertId() == id) {
+        alertDetails = currentAlerts.get(i);
+        currentAlerts.remove(i);
+        return alertDetails;
+      }
+    }
+    return null;
   }
 
 }

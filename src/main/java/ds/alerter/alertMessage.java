@@ -4,18 +4,18 @@
 package ds.alerter;
 
 /**
- * Protobuf type {@code alerter.alertMessage}
+ * Protobuf type {@code alerter.AlertMessage}
  */
-public  final class alertMessage extends
+public  final class AlertMessage extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:alerter.alertMessage)
-    alertMessageOrBuilder {
+    // @@protoc_insertion_point(message_implements:alerter.AlertMessage)
+    AlertMessageOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use alertMessage.newBuilder() to construct.
-  private alertMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use AlertMessage.newBuilder() to construct.
+  private AlertMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private alertMessage() {
+  private AlertMessage() {
     priorityLevel_ = 0;
     description_ = "";
   }
@@ -25,7 +25,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private alertMessage(
+  private AlertMessage(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -77,19 +77,19 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return ds.alerter.AlerterImpl.internal_static_alerter_alertMessage_descriptor;
+    return ds.alerter.AlerterImpl.internal_static_alerter_AlertMessage_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return ds.alerter.AlerterImpl.internal_static_alerter_alertMessage_fieldAccessorTable
+    return ds.alerter.AlerterImpl.internal_static_alerter_AlertMessage_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            ds.alerter.alertMessage.class, ds.alerter.alertMessage.Builder.class);
+            ds.alerter.AlertMessage.class, ds.alerter.AlertMessage.Builder.class);
   }
 
   /**
-   * Protobuf enum {@code alerter.alertMessage.PriorityLevel}
+   * Protobuf enum {@code alerter.AlertMessage.PriorityLevel}
    */
   public enum PriorityLevel
       implements com.google.protobuf.ProtocolMessageEnum {
@@ -177,7 +177,7 @@ private static final long serialVersionUID = 0L;
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return ds.alerter.alertMessage.getDescriptor().getEnumTypes().get(0);
+      return ds.alerter.AlertMessage.getDescriptor().getEnumTypes().get(0);
     }
 
     private static final PriorityLevel[] VALUES = values();
@@ -200,24 +200,24 @@ private static final long serialVersionUID = 0L;
       this.value = value;
     }
 
-    // @@protoc_insertion_point(enum_scope:alerter.alertMessage.PriorityLevel)
+    // @@protoc_insertion_point(enum_scope:alerter.AlertMessage.PriorityLevel)
   }
 
   public static final int PRIORITYLEVEL_FIELD_NUMBER = 1;
   private int priorityLevel_;
   /**
-   * <code>.alerter.alertMessage.PriorityLevel priorityLevel = 1;</code>
+   * <code>.alerter.AlertMessage.PriorityLevel priorityLevel = 1;</code>
    */
   public int getPriorityLevelValue() {
     return priorityLevel_;
   }
   /**
-   * <code>.alerter.alertMessage.PriorityLevel priorityLevel = 1;</code>
+   * <code>.alerter.AlertMessage.PriorityLevel priorityLevel = 1;</code>
    */
-  public ds.alerter.alertMessage.PriorityLevel getPriorityLevel() {
+  public ds.alerter.AlertMessage.PriorityLevel getPriorityLevel() {
     @SuppressWarnings("deprecation")
-    ds.alerter.alertMessage.PriorityLevel result = ds.alerter.alertMessage.PriorityLevel.valueOf(priorityLevel_);
-    return result == null ? ds.alerter.alertMessage.PriorityLevel.UNRECOGNIZED : result;
+    ds.alerter.AlertMessage.PriorityLevel result = ds.alerter.AlertMessage.PriorityLevel.valueOf(priorityLevel_);
+    return result == null ? ds.alerter.AlertMessage.PriorityLevel.UNRECOGNIZED : result;
   }
 
   public static final int DESCRIPTION_FIELD_NUMBER = 2;
@@ -268,7 +268,7 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (priorityLevel_ != ds.alerter.alertMessage.PriorityLevel.MEDIUM.getNumber()) {
+    if (priorityLevel_ != ds.alerter.AlertMessage.PriorityLevel.MEDIUM.getNumber()) {
       output.writeEnum(1, priorityLevel_);
     }
     if (!getDescriptionBytes().isEmpty()) {
@@ -283,7 +283,7 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (priorityLevel_ != ds.alerter.alertMessage.PriorityLevel.MEDIUM.getNumber()) {
+    if (priorityLevel_ != ds.alerter.AlertMessage.PriorityLevel.MEDIUM.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(1, priorityLevel_);
     }
@@ -300,10 +300,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof ds.alerter.alertMessage)) {
+    if (!(obj instanceof ds.alerter.AlertMessage)) {
       return super.equals(obj);
     }
-    ds.alerter.alertMessage other = (ds.alerter.alertMessage) obj;
+    ds.alerter.AlertMessage other = (ds.alerter.AlertMessage) obj;
 
     boolean result = true;
     result = result && priorityLevel_ == other.priorityLevel_;
@@ -329,69 +329,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static ds.alerter.alertMessage parseFrom(
+  public static ds.alerter.AlertMessage parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ds.alerter.alertMessage parseFrom(
+  public static ds.alerter.AlertMessage parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ds.alerter.alertMessage parseFrom(
+  public static ds.alerter.AlertMessage parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ds.alerter.alertMessage parseFrom(
+  public static ds.alerter.AlertMessage parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ds.alerter.alertMessage parseFrom(byte[] data)
+  public static ds.alerter.AlertMessage parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ds.alerter.alertMessage parseFrom(
+  public static ds.alerter.AlertMessage parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ds.alerter.alertMessage parseFrom(java.io.InputStream input)
+  public static ds.alerter.AlertMessage parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ds.alerter.alertMessage parseFrom(
+  public static ds.alerter.AlertMessage parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ds.alerter.alertMessage parseDelimitedFrom(java.io.InputStream input)
+  public static ds.alerter.AlertMessage parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static ds.alerter.alertMessage parseDelimitedFrom(
+  public static ds.alerter.AlertMessage parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ds.alerter.alertMessage parseFrom(
+  public static ds.alerter.AlertMessage parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ds.alerter.alertMessage parseFrom(
+  public static ds.alerter.AlertMessage parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -404,7 +404,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(ds.alerter.alertMessage prototype) {
+  public static Builder newBuilder(ds.alerter.AlertMessage prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -420,26 +420,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code alerter.alertMessage}
+   * Protobuf type {@code alerter.AlertMessage}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:alerter.alertMessage)
-      ds.alerter.alertMessageOrBuilder {
+      // @@protoc_insertion_point(builder_implements:alerter.AlertMessage)
+      ds.alerter.AlertMessageOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return ds.alerter.AlerterImpl.internal_static_alerter_alertMessage_descriptor;
+      return ds.alerter.AlerterImpl.internal_static_alerter_AlertMessage_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return ds.alerter.AlerterImpl.internal_static_alerter_alertMessage_fieldAccessorTable
+      return ds.alerter.AlerterImpl.internal_static_alerter_AlertMessage_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ds.alerter.alertMessage.class, ds.alerter.alertMessage.Builder.class);
+              ds.alerter.AlertMessage.class, ds.alerter.AlertMessage.Builder.class);
     }
 
-    // Construct using ds.alerter.alertMessage.newBuilder()
+    // Construct using ds.alerter.AlertMessage.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -467,17 +467,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return ds.alerter.AlerterImpl.internal_static_alerter_alertMessage_descriptor;
+      return ds.alerter.AlerterImpl.internal_static_alerter_AlertMessage_descriptor;
     }
 
     @java.lang.Override
-    public ds.alerter.alertMessage getDefaultInstanceForType() {
-      return ds.alerter.alertMessage.getDefaultInstance();
+    public ds.alerter.AlertMessage getDefaultInstanceForType() {
+      return ds.alerter.AlertMessage.getDefaultInstance();
     }
 
     @java.lang.Override
-    public ds.alerter.alertMessage build() {
-      ds.alerter.alertMessage result = buildPartial();
+    public ds.alerter.AlertMessage build() {
+      ds.alerter.AlertMessage result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -485,8 +485,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public ds.alerter.alertMessage buildPartial() {
-      ds.alerter.alertMessage result = new ds.alerter.alertMessage(this);
+    public ds.alerter.AlertMessage buildPartial() {
+      ds.alerter.AlertMessage result = new ds.alerter.AlertMessage(this);
       result.priorityLevel_ = priorityLevel_;
       result.description_ = description_;
       onBuilt();
@@ -527,16 +527,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof ds.alerter.alertMessage) {
-        return mergeFrom((ds.alerter.alertMessage)other);
+      if (other instanceof ds.alerter.AlertMessage) {
+        return mergeFrom((ds.alerter.AlertMessage)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(ds.alerter.alertMessage other) {
-      if (other == ds.alerter.alertMessage.getDefaultInstance()) return this;
+    public Builder mergeFrom(ds.alerter.AlertMessage other) {
+      if (other == ds.alerter.AlertMessage.getDefaultInstance()) return this;
       if (other.priorityLevel_ != 0) {
         setPriorityLevelValue(other.getPriorityLevelValue());
       }
@@ -559,11 +559,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      ds.alerter.alertMessage parsedMessage = null;
+      ds.alerter.AlertMessage parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (ds.alerter.alertMessage) e.getUnfinishedMessage();
+        parsedMessage = (ds.alerter.AlertMessage) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -575,13 +575,13 @@ private static final long serialVersionUID = 0L;
 
     private int priorityLevel_ = 0;
     /**
-     * <code>.alerter.alertMessage.PriorityLevel priorityLevel = 1;</code>
+     * <code>.alerter.AlertMessage.PriorityLevel priorityLevel = 1;</code>
      */
     public int getPriorityLevelValue() {
       return priorityLevel_;
     }
     /**
-     * <code>.alerter.alertMessage.PriorityLevel priorityLevel = 1;</code>
+     * <code>.alerter.AlertMessage.PriorityLevel priorityLevel = 1;</code>
      */
     public Builder setPriorityLevelValue(int value) {
       priorityLevel_ = value;
@@ -589,17 +589,17 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.alerter.alertMessage.PriorityLevel priorityLevel = 1;</code>
+     * <code>.alerter.AlertMessage.PriorityLevel priorityLevel = 1;</code>
      */
-    public ds.alerter.alertMessage.PriorityLevel getPriorityLevel() {
+    public ds.alerter.AlertMessage.PriorityLevel getPriorityLevel() {
       @SuppressWarnings("deprecation")
-      ds.alerter.alertMessage.PriorityLevel result = ds.alerter.alertMessage.PriorityLevel.valueOf(priorityLevel_);
-      return result == null ? ds.alerter.alertMessage.PriorityLevel.UNRECOGNIZED : result;
+      ds.alerter.AlertMessage.PriorityLevel result = ds.alerter.AlertMessage.PriorityLevel.valueOf(priorityLevel_);
+      return result == null ? ds.alerter.AlertMessage.PriorityLevel.UNRECOGNIZED : result;
     }
     /**
-     * <code>.alerter.alertMessage.PriorityLevel priorityLevel = 1;</code>
+     * <code>.alerter.AlertMessage.PriorityLevel priorityLevel = 1;</code>
      */
-    public Builder setPriorityLevel(ds.alerter.alertMessage.PriorityLevel value) {
+    public Builder setPriorityLevel(ds.alerter.AlertMessage.PriorityLevel value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -609,7 +609,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>.alerter.alertMessage.PriorityLevel priorityLevel = 1;</code>
+     * <code>.alerter.AlertMessage.PriorityLevel priorityLevel = 1;</code>
      */
     public Builder clearPriorityLevel() {
       
@@ -699,41 +699,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:alerter.alertMessage)
+    // @@protoc_insertion_point(builder_scope:alerter.AlertMessage)
   }
 
-  // @@protoc_insertion_point(class_scope:alerter.alertMessage)
-  private static final ds.alerter.alertMessage DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:alerter.AlertMessage)
+  private static final ds.alerter.AlertMessage DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new ds.alerter.alertMessage();
+    DEFAULT_INSTANCE = new ds.alerter.AlertMessage();
   }
 
-  public static ds.alerter.alertMessage getDefaultInstance() {
+  public static ds.alerter.AlertMessage getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<alertMessage>
-      PARSER = new com.google.protobuf.AbstractParser<alertMessage>() {
+  private static final com.google.protobuf.Parser<AlertMessage>
+      PARSER = new com.google.protobuf.AbstractParser<AlertMessage>() {
     @java.lang.Override
-    public alertMessage parsePartialFrom(
+    public AlertMessage parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new alertMessage(input, extensionRegistry);
+      return new AlertMessage(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<alertMessage> parser() {
+  public static com.google.protobuf.Parser<AlertMessage> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<alertMessage> getParserForType() {
+  public com.google.protobuf.Parser<AlertMessage> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public ds.alerter.alertMessage getDefaultInstanceForType() {
+  public ds.alerter.AlertMessage getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

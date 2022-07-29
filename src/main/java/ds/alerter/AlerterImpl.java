@@ -15,20 +15,20 @@ public final class AlerterImpl {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_alerter_alertMessage_descriptor;
+    internal_static_alerter_AlertMessage_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_alerter_alertMessage_fieldAccessorTable;
+      internal_static_alerter_AlertMessage_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_alerter_alertDetails_descriptor;
+    internal_static_alerter_AlertDetails_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_alerter_alertDetails_fieldAccessorTable;
+      internal_static_alerter_AlertDetails_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_alerter_alertIdMessage_descriptor;
+    internal_static_alerter_AlertIdMessage_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_alerter_alertIdMessage_fieldAccessorTable;
+      internal_static_alerter_AlertIdMessage_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -38,17 +38,17 @@ public final class AlerterImpl {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\ralerter.proto\022\007alerter\"\217\001\n\014alertMessag" +
-      "e\022:\n\rpriorityLevel\030\001 \001(\0162#.alerter.alert" +
+      "\n\ralerter.proto\022\007alerter\"\217\001\n\014AlertMessag" +
+      "e\022:\n\rpriorityLevel\030\001 \001(\0162#.alerter.Alert" +
       "Message.PriorityLevel\022\023\n\013description\030\002 \001" +
       "(\t\".\n\rPriorityLevel\022\n\n\006MEDIUM\020\000\022\010\n\004HIGH\020" +
-      "\001\022\007\n\003LOW\020\002\"L\n\014alertDetails\022+\n\014alertMessa" +
-      "ge\030\001 \001(\0132\025.alerter.alertMessage\022\017\n\007alert" +
-      "Id\030\002 \001(\t\"!\n\016alertIdMessage\022\017\n\007alertId\030\001 " +
-      "\001(\t2\205\001\n\007alerter\022:\n\010newAlert\022\025.alerter.al" +
-      "ertMessage\032\025.alerter.alertDetails\"\000\022>\n\nc" +
-      "learAlert\022\027.alerter.alertIdMessage\032\025.ale" +
-      "rter.alertDetails\"\000B\033\n\nds.alerterB\013Alert" +
+      "\001\022\007\n\003LOW\020\002\"L\n\014AlertDetails\022+\n\014alertMessa" +
+      "ge\030\001 \001(\0132\025.alerter.AlertMessage\022\017\n\007alert" +
+      "Id\030\002 \001(\005\"!\n\016AlertIdMessage\022\017\n\007alertId\030\001 " +
+      "\001(\0052\205\001\n\007Alerter\022:\n\010NewAlert\022\025.alerter.Al" +
+      "ertMessage\032\025.alerter.AlertDetails\"\000\022>\n\nC" +
+      "learAlert\022\027.alerter.AlertIdMessage\032\025.ale" +
+      "rter.AlertDetails\"\000B\033\n\nds.alerterB\013Alert" +
       "erImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
@@ -63,23 +63,23 @@ public final class AlerterImpl {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_alerter_alertMessage_descriptor =
+    internal_static_alerter_AlertMessage_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_alerter_alertMessage_fieldAccessorTable = new
+    internal_static_alerter_AlertMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_alerter_alertMessage_descriptor,
+        internal_static_alerter_AlertMessage_descriptor,
         new java.lang.String[] { "PriorityLevel", "Description", });
-    internal_static_alerter_alertDetails_descriptor =
+    internal_static_alerter_AlertDetails_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_alerter_alertDetails_fieldAccessorTable = new
+    internal_static_alerter_AlertDetails_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_alerter_alertDetails_descriptor,
+        internal_static_alerter_AlertDetails_descriptor,
         new java.lang.String[] { "AlertMessage", "AlertId", });
-    internal_static_alerter_alertIdMessage_descriptor =
+    internal_static_alerter_AlertIdMessage_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_alerter_alertIdMessage_fieldAccessorTable = new
+    internal_static_alerter_AlertIdMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_alerter_alertIdMessage_descriptor,
+        internal_static_alerter_AlertIdMessage_descriptor,
         new java.lang.String[] { "AlertId", });
   }
 

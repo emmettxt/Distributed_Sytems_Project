@@ -7,16 +7,16 @@ option java_outer_classname = "AlerterImpl";
 package alerter;
 
 // Interface exported by the server.
-service alerter {
+service Alerter {
   //Add new alert to server
-  rpc newAlert(alertMessage) returns (alertDetails) {}
+  rpc NewAlert(AlertMessage) returns (AlertDetails) {}
 
   //clears and alert from server
-  rpc clearAlert(alertIdMessage) returns (alertDetails){}
+  rpc ClearAlert(AlertIdMessage) returns (AlertDetails){}
 
 }
 
-message alertMessage{
+message AlertMessage{
   enum PriorityLevel{
     MEDIUM = 0; //Default
     HIGH = 1;
@@ -25,10 +25,10 @@ message alertMessage{
   PriorityLevel priorityLevel = 1;
   string description = 2;
 }
-message alertDetails {
-  alertMessage alertMessage = 1;
-  string alertId = 2;
+message AlertDetails {
+  AlertMessage alertMessage = 1;
+  int32 alertId = 2;
 }
-message alertIdMessage{
-  string alertId = 1;
+message AlertIdMessage{
+  int32 alertId = 1;
 }

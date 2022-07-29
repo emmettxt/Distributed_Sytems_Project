@@ -23,38 +23,38 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.15.0)",
     comments = "Source: alerter.proto")
-public final class alerterGrpc {
+public final class AlerterGrpc {
 
-  private alerterGrpc() {}
+  private AlerterGrpc() {}
 
-  public static final String SERVICE_NAME = "alerter.alerter";
+  public static final String SERVICE_NAME = "alerter.Alerter";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<ds.alerter.alertMessage,
-      ds.alerter.alertDetails> getNewAlertMethod;
+  private static volatile io.grpc.MethodDescriptor<ds.alerter.AlertMessage,
+      ds.alerter.AlertDetails> getNewAlertMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "newAlert",
-      requestType = ds.alerter.alertMessage.class,
-      responseType = ds.alerter.alertDetails.class,
+      fullMethodName = SERVICE_NAME + '/' + "NewAlert",
+      requestType = ds.alerter.AlertMessage.class,
+      responseType = ds.alerter.AlertDetails.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<ds.alerter.alertMessage,
-      ds.alerter.alertDetails> getNewAlertMethod() {
-    io.grpc.MethodDescriptor<ds.alerter.alertMessage, ds.alerter.alertDetails> getNewAlertMethod;
-    if ((getNewAlertMethod = alerterGrpc.getNewAlertMethod) == null) {
-      synchronized (alerterGrpc.class) {
-        if ((getNewAlertMethod = alerterGrpc.getNewAlertMethod) == null) {
-          alerterGrpc.getNewAlertMethod = getNewAlertMethod = 
-              io.grpc.MethodDescriptor.<ds.alerter.alertMessage, ds.alerter.alertDetails>newBuilder()
+  public static io.grpc.MethodDescriptor<ds.alerter.AlertMessage,
+      ds.alerter.AlertDetails> getNewAlertMethod() {
+    io.grpc.MethodDescriptor<ds.alerter.AlertMessage, ds.alerter.AlertDetails> getNewAlertMethod;
+    if ((getNewAlertMethod = AlerterGrpc.getNewAlertMethod) == null) {
+      synchronized (AlerterGrpc.class) {
+        if ((getNewAlertMethod = AlerterGrpc.getNewAlertMethod) == null) {
+          AlerterGrpc.getNewAlertMethod = getNewAlertMethod = 
+              io.grpc.MethodDescriptor.<ds.alerter.AlertMessage, ds.alerter.AlertDetails>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "alerter.alerter", "newAlert"))
+                  "alerter.Alerter", "NewAlert"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ds.alerter.alertMessage.getDefaultInstance()))
+                  ds.alerter.AlertMessage.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ds.alerter.alertDetails.getDefaultInstance()))
-                  .setSchemaDescriptor(new alerterMethodDescriptorSupplier("newAlert"))
+                  ds.alerter.AlertDetails.getDefaultInstance()))
+                  .setSchemaDescriptor(new AlerterMethodDescriptorSupplier("NewAlert"))
                   .build();
           }
         }
@@ -62,31 +62,31 @@ public final class alerterGrpc {
      return getNewAlertMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<ds.alerter.alertIdMessage,
-      ds.alerter.alertDetails> getClearAlertMethod;
+  private static volatile io.grpc.MethodDescriptor<ds.alerter.AlertIdMessage,
+      ds.alerter.AlertDetails> getClearAlertMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "clearAlert",
-      requestType = ds.alerter.alertIdMessage.class,
-      responseType = ds.alerter.alertDetails.class,
+      fullMethodName = SERVICE_NAME + '/' + "ClearAlert",
+      requestType = ds.alerter.AlertIdMessage.class,
+      responseType = ds.alerter.AlertDetails.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<ds.alerter.alertIdMessage,
-      ds.alerter.alertDetails> getClearAlertMethod() {
-    io.grpc.MethodDescriptor<ds.alerter.alertIdMessage, ds.alerter.alertDetails> getClearAlertMethod;
-    if ((getClearAlertMethod = alerterGrpc.getClearAlertMethod) == null) {
-      synchronized (alerterGrpc.class) {
-        if ((getClearAlertMethod = alerterGrpc.getClearAlertMethod) == null) {
-          alerterGrpc.getClearAlertMethod = getClearAlertMethod = 
-              io.grpc.MethodDescriptor.<ds.alerter.alertIdMessage, ds.alerter.alertDetails>newBuilder()
+  public static io.grpc.MethodDescriptor<ds.alerter.AlertIdMessage,
+      ds.alerter.AlertDetails> getClearAlertMethod() {
+    io.grpc.MethodDescriptor<ds.alerter.AlertIdMessage, ds.alerter.AlertDetails> getClearAlertMethod;
+    if ((getClearAlertMethod = AlerterGrpc.getClearAlertMethod) == null) {
+      synchronized (AlerterGrpc.class) {
+        if ((getClearAlertMethod = AlerterGrpc.getClearAlertMethod) == null) {
+          AlerterGrpc.getClearAlertMethod = getClearAlertMethod = 
+              io.grpc.MethodDescriptor.<ds.alerter.AlertIdMessage, ds.alerter.AlertDetails>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "alerter.alerter", "clearAlert"))
+                  "alerter.Alerter", "ClearAlert"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ds.alerter.alertIdMessage.getDefaultInstance()))
+                  ds.alerter.AlertIdMessage.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ds.alerter.alertDetails.getDefaultInstance()))
-                  .setSchemaDescriptor(new alerterMethodDescriptorSupplier("clearAlert"))
+                  ds.alerter.AlertDetails.getDefaultInstance()))
+                  .setSchemaDescriptor(new AlerterMethodDescriptorSupplier("ClearAlert"))
                   .build();
           }
         }
@@ -97,24 +97,24 @@ public final class alerterGrpc {
   /**
    * Creates a new async stub that supports all call types for the service
    */
-  public static alerterStub newStub(io.grpc.Channel channel) {
-    return new alerterStub(channel);
+  public static AlerterStub newStub(io.grpc.Channel channel) {
+    return new AlerterStub(channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
-  public static alerterBlockingStub newBlockingStub(
+  public static AlerterBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new alerterBlockingStub(channel);
+    return new AlerterBlockingStub(channel);
   }
 
   /**
    * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
-  public static alerterFutureStub newFutureStub(
+  public static AlerterFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new alerterFutureStub(channel);
+    return new AlerterFutureStub(channel);
   }
 
   /**
@@ -122,15 +122,15 @@ public final class alerterGrpc {
    * Interface exported by the server.
    * </pre>
    */
-  public static abstract class alerterImplBase implements io.grpc.BindableService {
+  public static abstract class AlerterImplBase implements io.grpc.BindableService {
 
     /**
      * <pre>
      *Add new alert to server
      * </pre>
      */
-    public void newAlert(ds.alerter.alertMessage request,
-        io.grpc.stub.StreamObserver<ds.alerter.alertDetails> responseObserver) {
+    public void newAlert(ds.alerter.AlertMessage request,
+        io.grpc.stub.StreamObserver<ds.alerter.AlertDetails> responseObserver) {
       asyncUnimplementedUnaryCall(getNewAlertMethod(), responseObserver);
     }
 
@@ -139,8 +139,8 @@ public final class alerterGrpc {
      *clears and alert from server
      * </pre>
      */
-    public void clearAlert(ds.alerter.alertIdMessage request,
-        io.grpc.stub.StreamObserver<ds.alerter.alertDetails> responseObserver) {
+    public void clearAlert(ds.alerter.AlertIdMessage request,
+        io.grpc.stub.StreamObserver<ds.alerter.AlertDetails> responseObserver) {
       asyncUnimplementedUnaryCall(getClearAlertMethod(), responseObserver);
     }
 
@@ -150,15 +150,15 @@ public final class alerterGrpc {
             getNewAlertMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                ds.alerter.alertMessage,
-                ds.alerter.alertDetails>(
+                ds.alerter.AlertMessage,
+                ds.alerter.AlertDetails>(
                   this, METHODID_NEW_ALERT)))
           .addMethod(
             getClearAlertMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                ds.alerter.alertIdMessage,
-                ds.alerter.alertDetails>(
+                ds.alerter.AlertIdMessage,
+                ds.alerter.AlertDetails>(
                   this, METHODID_CLEAR_ALERT)))
           .build();
     }
@@ -169,20 +169,20 @@ public final class alerterGrpc {
    * Interface exported by the server.
    * </pre>
    */
-  public static final class alerterStub extends io.grpc.stub.AbstractStub<alerterStub> {
-    private alerterStub(io.grpc.Channel channel) {
+  public static final class AlerterStub extends io.grpc.stub.AbstractStub<AlerterStub> {
+    private AlerterStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private alerterStub(io.grpc.Channel channel,
+    private AlerterStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected alerterStub build(io.grpc.Channel channel,
+    protected AlerterStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new alerterStub(channel, callOptions);
+      return new AlerterStub(channel, callOptions);
     }
 
     /**
@@ -190,8 +190,8 @@ public final class alerterGrpc {
      *Add new alert to server
      * </pre>
      */
-    public void newAlert(ds.alerter.alertMessage request,
-        io.grpc.stub.StreamObserver<ds.alerter.alertDetails> responseObserver) {
+    public void newAlert(ds.alerter.AlertMessage request,
+        io.grpc.stub.StreamObserver<ds.alerter.AlertDetails> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getNewAlertMethod(), getCallOptions()), request, responseObserver);
     }
@@ -201,8 +201,8 @@ public final class alerterGrpc {
      *clears and alert from server
      * </pre>
      */
-    public void clearAlert(ds.alerter.alertIdMessage request,
-        io.grpc.stub.StreamObserver<ds.alerter.alertDetails> responseObserver) {
+    public void clearAlert(ds.alerter.AlertIdMessage request,
+        io.grpc.stub.StreamObserver<ds.alerter.AlertDetails> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getClearAlertMethod(), getCallOptions()), request, responseObserver);
     }
@@ -213,20 +213,20 @@ public final class alerterGrpc {
    * Interface exported by the server.
    * </pre>
    */
-  public static final class alerterBlockingStub extends io.grpc.stub.AbstractStub<alerterBlockingStub> {
-    private alerterBlockingStub(io.grpc.Channel channel) {
+  public static final class AlerterBlockingStub extends io.grpc.stub.AbstractStub<AlerterBlockingStub> {
+    private AlerterBlockingStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private alerterBlockingStub(io.grpc.Channel channel,
+    private AlerterBlockingStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected alerterBlockingStub build(io.grpc.Channel channel,
+    protected AlerterBlockingStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new alerterBlockingStub(channel, callOptions);
+      return new AlerterBlockingStub(channel, callOptions);
     }
 
     /**
@@ -234,7 +234,7 @@ public final class alerterGrpc {
      *Add new alert to server
      * </pre>
      */
-    public ds.alerter.alertDetails newAlert(ds.alerter.alertMessage request) {
+    public ds.alerter.AlertDetails newAlert(ds.alerter.AlertMessage request) {
       return blockingUnaryCall(
           getChannel(), getNewAlertMethod(), getCallOptions(), request);
     }
@@ -244,7 +244,7 @@ public final class alerterGrpc {
      *clears and alert from server
      * </pre>
      */
-    public ds.alerter.alertDetails clearAlert(ds.alerter.alertIdMessage request) {
+    public ds.alerter.AlertDetails clearAlert(ds.alerter.AlertIdMessage request) {
       return blockingUnaryCall(
           getChannel(), getClearAlertMethod(), getCallOptions(), request);
     }
@@ -255,20 +255,20 @@ public final class alerterGrpc {
    * Interface exported by the server.
    * </pre>
    */
-  public static final class alerterFutureStub extends io.grpc.stub.AbstractStub<alerterFutureStub> {
-    private alerterFutureStub(io.grpc.Channel channel) {
+  public static final class AlerterFutureStub extends io.grpc.stub.AbstractStub<AlerterFutureStub> {
+    private AlerterFutureStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private alerterFutureStub(io.grpc.Channel channel,
+    private AlerterFutureStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected alerterFutureStub build(io.grpc.Channel channel,
+    protected AlerterFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new alerterFutureStub(channel, callOptions);
+      return new AlerterFutureStub(channel, callOptions);
     }
 
     /**
@@ -276,8 +276,8 @@ public final class alerterGrpc {
      *Add new alert to server
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<ds.alerter.alertDetails> newAlert(
-        ds.alerter.alertMessage request) {
+    public com.google.common.util.concurrent.ListenableFuture<ds.alerter.AlertDetails> newAlert(
+        ds.alerter.AlertMessage request) {
       return futureUnaryCall(
           getChannel().newCall(getNewAlertMethod(), getCallOptions()), request);
     }
@@ -287,8 +287,8 @@ public final class alerterGrpc {
      *clears and alert from server
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<ds.alerter.alertDetails> clearAlert(
-        ds.alerter.alertIdMessage request) {
+    public com.google.common.util.concurrent.ListenableFuture<ds.alerter.AlertDetails> clearAlert(
+        ds.alerter.AlertIdMessage request) {
       return futureUnaryCall(
           getChannel().newCall(getClearAlertMethod(), getCallOptions()), request);
     }
@@ -302,10 +302,10 @@ public final class alerterGrpc {
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final alerterImplBase serviceImpl;
+    private final AlerterImplBase serviceImpl;
     private final int methodId;
 
-    MethodHandlers(alerterImplBase serviceImpl, int methodId) {
+    MethodHandlers(AlerterImplBase serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -315,12 +315,12 @@ public final class alerterGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_NEW_ALERT:
-          serviceImpl.newAlert((ds.alerter.alertMessage) request,
-              (io.grpc.stub.StreamObserver<ds.alerter.alertDetails>) responseObserver);
+          serviceImpl.newAlert((ds.alerter.AlertMessage) request,
+              (io.grpc.stub.StreamObserver<ds.alerter.AlertDetails>) responseObserver);
           break;
         case METHODID_CLEAR_ALERT:
-          serviceImpl.clearAlert((ds.alerter.alertIdMessage) request,
-              (io.grpc.stub.StreamObserver<ds.alerter.alertDetails>) responseObserver);
+          serviceImpl.clearAlert((ds.alerter.AlertIdMessage) request,
+              (io.grpc.stub.StreamObserver<ds.alerter.AlertDetails>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -338,9 +338,9 @@ public final class alerterGrpc {
     }
   }
 
-  private static abstract class alerterBaseDescriptorSupplier
+  private static abstract class AlerterBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    alerterBaseDescriptorSupplier() {}
+    AlerterBaseDescriptorSupplier() {}
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
@@ -349,21 +349,21 @@ public final class alerterGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
-      return getFileDescriptor().findServiceByName("alerter");
+      return getFileDescriptor().findServiceByName("Alerter");
     }
   }
 
-  private static final class alerterFileDescriptorSupplier
-      extends alerterBaseDescriptorSupplier {
-    alerterFileDescriptorSupplier() {}
+  private static final class AlerterFileDescriptorSupplier
+      extends AlerterBaseDescriptorSupplier {
+    AlerterFileDescriptorSupplier() {}
   }
 
-  private static final class alerterMethodDescriptorSupplier
-      extends alerterBaseDescriptorSupplier
+  private static final class AlerterMethodDescriptorSupplier
+      extends AlerterBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
     private final String methodName;
 
-    alerterMethodDescriptorSupplier(String methodName) {
+    AlerterMethodDescriptorSupplier(String methodName) {
       this.methodName = methodName;
     }
 
@@ -378,11 +378,11 @@ public final class alerterGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (alerterGrpc.class) {
+      synchronized (AlerterGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new alerterFileDescriptorSupplier())
+              .setSchemaDescriptor(new AlerterFileDescriptorSupplier())
               .addMethod(getNewAlertMethod())
               .addMethod(getClearAlertMethod())
               .build();
