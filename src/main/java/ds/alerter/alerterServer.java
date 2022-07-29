@@ -13,6 +13,7 @@ import javax.jmdns.ServiceInfo;
 import ds.alerter.AlerterGrpc.AlerterImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.internal.Stream;
 import io.grpc.stub.StreamObserver;
 
 public class AlerterServer extends AlerterImplBase {
@@ -134,6 +135,14 @@ public class AlerterServer extends AlerterImplBase {
         responsObserver.onCompleted();
         return;
       }
+    }
+    responsObserver.onCompleted();
+  }
+
+  @Override
+  public void getCurrentAlerts(EmptyMessage req, StreamObserver<AlertDetails> responsObserver){
+    for(AlertDetails alertdetails : currentAlerts){
+      responsObserver.onNext(alertdetails);
     }
     responsObserver.onCompleted();
 
