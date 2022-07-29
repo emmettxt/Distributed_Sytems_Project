@@ -15,6 +15,15 @@ import io.grpc.ServerBuilder;
 
 public class StockManagerServer extends stockManagerImplBase {
 
+  private StockDatabase stockDatabase;
+  public StockManagerServer() {
+    try {
+      stockDatabase = StockManagerUtil.parseDatabase();
+    } catch (IOException e) {
+      stockDatabase = StockDatabase.newBuilder().build();
+    }
+  } 
+
   public static void main(String[] args) {
     StockManagerServer stockerManagerServer = new StockManagerServer();
 

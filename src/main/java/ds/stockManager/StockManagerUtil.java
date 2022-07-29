@@ -16,10 +16,10 @@ public class StockManagerUtil {
   static String defaultPath = "animal_locator_db.json";
 
   public static StockDatabase parseDatabase() throws IOException {
-    return StockDatabase(defaultPath);
+    return parseDatabase(defaultPath);
   }
 
-  private static StockDatabase StockDatabase(String path) throws IOException {
+  private static StockDatabase parseDatabase(String path) throws IOException {
     InputStream input = new FileInputStream(path);
     try {
       Reader reader = new InputStreamReader(input, Charset.forName("UTF-8"));
