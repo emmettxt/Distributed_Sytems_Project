@@ -118,7 +118,7 @@ public class AlerterServer extends AlerterImplBase {
     return alertDetails;
   }
 
-  private AlertDetails clearAlert(AlertIdMessage alertIdMessage) {
+  public AlertDetails clearAlert(AlertIdMessage alertIdMessage) {
     int id = alertIdMessage.getAlertId();
     AlertDetails alertDetails;
     for (int i = 0; i < currentAlerts.size(); i++) {
