@@ -16,7 +16,7 @@ import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
 public class AlerterServer extends AlerterImplBase {
-  private ArrayList<AlertDetails> currentAlerts;
+  private ArrayList<AlertDetails> currentAlerts = new ArrayList<AlertDetails>();
   private int alertCount = 0;
 
   public static void main(String[] args) {
@@ -115,20 +115,28 @@ public class AlerterServer extends AlerterImplBase {
     AlertDetails alertDetails = AlertDetails.newBuilder().setAlertId(alertCount).setAlertMessage(alertMessage).build();
     alertCount += 1;
     currentAlerts.add(alertDetails);
+    System.out.println("New Alert Registered: ");
+    System.out.println("Id: " + alertDetails.getAlertId());
+    System.out.println("Priority: " + alertDetails.getAlertMessage().getPriorityLevel());
+    System.out.println("Description: " + alertDetails.getAlertMessage().getDescription() + "\n");
     return alertDetails;
   }
 
-  public AlertDetails clearAlert(AlertIdMessage alertIdMessage) {
+  public void clearAlert(AlertIdMessage alertIdMessage, StreamObserver<AlertDetails> responsObserver) {
     int id = alertIdMessage.getAlertId();
+    System.out.println("Clearing alert with Id: " + id);
     AlertDetails alertDetails;
     for (int i = 0; i < currentAlerts.size(); i++) {
       if (currentAlerts.get(i).getAlertId() == id) {
         alertDetails = currentAlerts.get(i);
         currentAlerts.remove(i);
-        return alertDetails;
+        responsObserver.onNext(alertDetails);
+        responsObserver.onCompleted();
+        return;
       }
     }
-    return null;
+    responsObserver.onCompleted();
+
   }
 
 }
