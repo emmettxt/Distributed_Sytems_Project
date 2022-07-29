@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ds.alerter";
+option java_outer_classname = "AlerterImpl";
+import "google/protobuf/timestamp.proto";
+
+package alerter;
+
+// Interface exported by the server.
+service animalLocator {
+  //Add new alert to server
+  rpc newAlert(alertMessage) returns (alertDetails) {}
+
+  //clears and alert from server
+  rpc clearAlert(alertIdMessage) returns (alertDetails){}
+
+}
+
+message alertMessage{
+  enum priorityLevel{
+    MEDIUM = 0; //Default
+    HIGH = 1;
+    LOW = 2;
+  }
+  string description = 1;
+}
+message alertMessage {
+  alertMessage alertMessage = 1;
+  string alertId = 2;
+}
+message alertIdMessage{
+  string alertId = 1;
+}
