@@ -17,7 +17,7 @@ service  stockManager{
 }
 
 message StockMessage{
-  String stockType = 1;
+  string stockType = 1;
   double stockVolume =2;
 }
 
