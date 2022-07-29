@@ -34,10 +34,10 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
     public static void main(String[] args) throws IOException {
         AnimalLocatorServer animalLocatorServer = new AnimalLocatorServer();
 
-		Properties prop = animalLocatorServer.getProperties();
-		animalLocatorServer.registerService(prop);
+        Properties prop = animalLocatorServer.getProperties();
+        animalLocatorServer.registerService(prop);
 
-		int port = Integer.valueOf( prop.getProperty("service_port") );// #.50051;
+        int port = Integer.valueOf(prop.getProperty("service_port"));// #.50051;
 
         try {
 
@@ -91,41 +91,41 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
         return prop;
     }
 
-    private  void registerService(Properties prop) {
-		
+    private void registerService(Properties prop) {
+
         try {
-               // Create a JmDNS instance
-               JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
-               
-               String service_type = prop.getProperty("service_type") ;//"_http._tcp.local.";
-               String service_name = prop.getProperty("service_name")  ;// "example";
-               int service_port = Integer.valueOf( prop.getProperty("service_port") );// #.50051;
+            // Create a JmDNS instance
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 
-               
-               String service_description_properties = prop.getProperty("service_description")  ;//"path=index.html";
-               
-               // Register a service
-               ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port, service_description_properties);
-               jmdns.registerService(serviceInfo);
-               
-               System.out.printf("registrering service with type %s and name %s \n", service_type, service_name);
-               
-               // Wait a bit
-               Thread.sleep(1000);
-               System.out.println("Host Name: " +jmdns.getHostName());
-               System.out.println("Inet4Addresses: " + serviceInfo.getInetAddresses()[0]);
+            String service_type = prop.getProperty("service_type");// "_http._tcp.local.";
+            String service_name = prop.getProperty("service_name");// "example";
+            int service_port = Integer.valueOf(prop.getProperty("service_port"));// #.50051;
 
-               // Unregister all services
-               //jmdns.unregisterAllServices();
+            String service_description_properties = prop.getProperty("service_description");// "path=index.html";
 
-           } catch (IOException e) {
-               System.out.println(e.getMessage());
-           } catch (InterruptedException e) {
-               // TODO Auto-generated catch block
-               e.printStackTrace();
-           }
-       
-   }
+            // Register a service
+            ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port,
+                    service_description_properties);
+            jmdns.registerService(serviceInfo);
+
+            System.out.printf("registrering service with type %s and name %s \n", service_type, service_name);
+
+            // Wait a bit
+            Thread.sleep(1000);
+            System.out.println("Host Name: " + jmdns.getHostName());
+            System.out.println("Inet4Addresses: " + serviceInfo.getInetAddresses()[0]);
+
+            // Unregister all services
+            // jmdns.unregisterAllServices();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
 
     // add locationMessage to locationMessages and sends to file
     private void newLocationMessage(LocationMessage locationMessage) {
