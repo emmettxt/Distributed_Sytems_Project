@@ -17,11 +17,15 @@ service  stockManager{
 }
 
 message StockMessage{
-  string
-  
-   stockType = 1;
+  string stockType = 1;
   double stockVolume =2;
 }
 
 message EmptyStockMessage{}
+
+
+//database of stock, not used as message
+message StockDatabase{
+  repeated StockMessage StockMessage = 1;
+}
 
