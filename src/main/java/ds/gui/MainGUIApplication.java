@@ -8,17 +8,18 @@ import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneLayout;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Timestamp;
 import com.google.protobuf.util.JsonFormat;
 
 import ds.alerter.AlertDetails;
+import ds.alerter.AlertIdMessage;
 import ds.alerter.AlertMessage;
 import ds.alerter.AlerterClient;
 import ds.alerter.AlertMessage.PriorityLevel;
 import ds.animalLocator.AnimalLocatorClient;
-import ds.animalLocator.EmptyMessage;
 import ds.animalLocator.HeardMemeberNMessage;
 import ds.animalLocator.LocationMessage;
 import ds.animalLocator.LocationResponse;
@@ -434,7 +435,7 @@ public class MainGUIApplication {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					textResponse.setText("");
-					EmptyMessage emptyMessage = EmptyMessage.newBuilder().build();
+					ds.animalLocator.EmptyMessage emptyMessage = ds.animalLocator.EmptyMessage.newBuilder().build();
 					Iterator<LocationMessage> locationmessages;
 					locationmessages = client.getBlockingStub().currentHeardLocation(emptyMessage);
 					while (locationmessages.hasNext()) {
@@ -467,6 +468,7 @@ public class MainGUIApplication {
 		public String Label = "Alerter";
 		// TODO Enable AnimalLocatorClient
 		private AlerterClient client = new AlerterClient();
+		private JPanel currentAlertPanel = currentAlertPanel();
 
 		AlerterPanel() {
 			// intialise panel and set visibilty
@@ -474,6 +476,7 @@ public class MainGUIApplication {
 			servicePanel.setVisible(false);
 			servicePanel.setLayout(new BoxLayout(servicePanel, BoxLayout.Y_AXIS));
 			servicePanel.add(newAlertPanel());
+			servicePanel.add(currentAlertPanel);
 			// servicePanel.add(LastNLocationsPanel());
 			// servicePanel.add(CurrentHeardLocationPanel());
 		}
@@ -508,12 +511,59 @@ public class MainGUIApplication {
 					AlertDetails alertDetails =  client.getBlockingStub().newAlert(alertMessage);
 
 					System.out.println("New Alert Registered, id: " + alertDetails.getAlertId());	
+					refreshCurrentAlertPanel();
 				}
 			});
 			return newAlertPanel;
 		}
-	}
+		
+		private JPanel currentAlertPanel(){
+			JPanel currentAlertPanel = new JPanel();
+			JPanel currentAlertsContainer = new JPanel();
+			currentAlertsContainer.setLayout(new BoxLayout(currentAlertsContainer, BoxLayout.Y_AXIS));
+			currentAlertsContainer.setSize(40, 10);
+			//TODO fix this scrollpane
+			JScrollPane scrollPane = new JScrollPane(currentAlertsContainer);
+			
+			ds.alerter.EmptyMessage emptyMessage = ds.alerter.EmptyMessage.newBuilder().build();
+			Iterator<AlertDetails> currentAlerts;
+			currentAlerts = client.getBlockingStub().getCurrentAlerts(emptyMessage);
+			while(currentAlerts.hasNext()){
+				AlertDetails alertDetails = currentAlerts.next();
+				JPanel alertPanel = new JPanel();
 
+				alertPanel.add(new JLabel(alertDetails.getAlertMessage().getPriorityLevel().toString()));
+				alertPanel.add(new JLabel(alertDetails.getAlertMessage().getDescription()));
+				JButton clearButton = new JButton("Clear Alert");
+				alertPanel.add(clearButton);
+				clearButton.addActionListener(new ActionListener(){
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						AlertIdMessage alertIdMessage = AlertIdMessage.newBuilder().setAlertId(alertDetails.getAlertId()).build();
+						client.getBlockingStub().clearAlert(alertIdMessage);
+						refreshCurrentAlertPanel();
+					}
+
+				});
+				currentAlertsContainer.add(alertPanel);
+
+			}
+			currentAlertPanel.add(scrollPane);
+			return currentAlertPanel;
+
+
+		}
+		private void refreshCurrentAlertPanel(){
+			servicePanel.remove(currentAlertPanel);
+			this.currentAlertPanel = currentAlertPanel();
+			servicePanel.add(currentAlertPanel);
+			servicePanel.revalidate();
+			servicePanel.repaint();
+			currentAlertPanel.revalidate();
+			currentAlertPanel.repaint();
+		}
+	}
 	
 	private JPanel service3Initialise() {
 		JPanel panel_service_1 = new JPanel();
