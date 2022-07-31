@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.util.List;
 import java.util.Properties;
 
 import javax.jmdns.JmDNS;
@@ -12,17 +13,19 @@ import javax.jmdns.ServiceInfo;
 import ds.stockManager.stockManagerGrpc.stockManagerImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.stub.StreamObserver;
 
 public class StockManagerServer extends stockManagerImplBase {
 
   private StockDatabase stockDatabase;
+
   public StockManagerServer() {
     try {
       stockDatabase = StockManagerUtil.parseDatabase();
     } catch (IOException e) {
       stockDatabase = StockDatabase.newBuilder().build();
     }
-  } 
+  }
 
   public static void main(String[] args) {
     StockManagerServer stockerManagerServer = new StockManagerServer();
@@ -109,5 +112,54 @@ public class StockManagerServer extends stockManagerImplBase {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public StreamObserver<StockMessage> addStock(StreamObserver<StockMessage> responseObserver) {
+
+    return new StreamObserver<StockMessage>() {
+
+      @Override
+      public void onNext(StockMessage stockMessage) {
+        // add to database object
+        addToStockDB(stockMessage);
+
+      }
+
+      @Override
+      public void onError(Throwable t) {
+        // TODO Auto-generated method stub
+        System.out.println(t);
+      }
+
+      @Override
+      public void onCompleted() {
+        StockManagerUtil.writeToDB(stockDatabase);
+
+      }
+
+    };
+
+  }
+
+  // method that add stock message to Db. Checks if aleardy exists and add to
+  // total. or add new item.
+  private void addToStockDB(StockMessage newStockMessage) {
+    List<StockMessage> stockMessageList = stockDatabase.getStockMessageList();
+    ds.stockManager.StockDatabase.Builder newstockDbBuilder = StockDatabase.newBuilder();
+    // go through each current stock item
+    for (StockMessage stockMessage : stockMessageList) {
+      // if is of the same type as new stock item replace with new value
+      if (stockMessage.getStockType().equals(newStockMessage.getStockType())) {
+        Double newVolume = stockMessage.getStockVolume() + newStockMessage.getStockVolume();
+        newstockDbBuilder.addStockMessage(
+            StockMessage.newBuilder().setStockType(stockMessage.getStockType()).setStockVolume(newVolume));
+      }
+      //just add to new db
+      else{
+        newstockDbBuilder.addStockMessage(stockMessage);
+      }
+    }
+    stockDatabase = newstockDbBuilder.build();
   }
 }

@@ -38,22 +38,26 @@ public class StockManagerUtil {
   }
 
   // wrties to default DB
-  public static void writeToDB(StockDatabase database) throws InvalidProtocolBufferException {
+  public static void writeToDB(StockDatabase database){
 
     writeToDB(database, defaultPath);
 
   }
 
-  public static void writeToDB(StockDatabase database, String path) throws InvalidProtocolBufferException {
+  public static void writeToDB(StockDatabase database, String path) {
     System.out.println("Writing to Database...");
-    String json = JsonFormat.printer().print(database);
+    String json;
     try {
+      json = JsonFormat.printer().print(database);
       PrintWriter printWriter = new PrintWriter(new FileWriter(path));
       printWriter.write(json);
       printWriter.close();
+    } catch (InvalidProtocolBufferException e1) {
+      System.out.println("Error trying to write DB to file: ");
+      e1.printStackTrace();
     } catch (IOException e) {
+      System.out.println("Error trying to write DB to file: ");
       e.printStackTrace();
     }
-
   }
 }
