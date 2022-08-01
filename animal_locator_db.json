@@ -1,15 +1,24 @@
 {
-  "StockMessage": [{
-    "stockType": "Wood",
-    "stockVolume": 50.0
+  "locationMessage": [{
+    "point": {
+      "latitude": 15,
+      "longitude": 5
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-08-01T10:06:25.362Z"
   }, {
-    "stockType": "Grain",
-    "stockVolume": 150.0
+    "point": {
+      "latitude": 22,
+      "longitude": 45
+    },
+    "AnimalId": "AnimalID_1",
+    "Time": "2022-08-01T10:06:30.689Z"
   }, {
-    "stockType": "Feed",
-    "stockVolume": 200.0
-  }, {
-    "stockType": "Diesel",
-    "stockVolume": 80.0
+    "point": {
+      "latitude": 54,
+      "longitude": 23
+    },
+    "AnimalId": "AnimalID_2",
+    "Time": "2022-08-01T10:06:36.616Z"
   }]
 }

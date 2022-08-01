@@ -13,7 +13,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 
 public class StockManagerUtil {
-  static String defaultPath = "animal_locator_db.json";
+  static String defaultPath = "stock_manager_db.json";
 
   public static StockDatabase parseDatabase() throws IOException {
     return parseDatabase(defaultPath);

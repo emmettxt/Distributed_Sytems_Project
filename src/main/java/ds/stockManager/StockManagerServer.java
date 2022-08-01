@@ -203,7 +203,7 @@ public class StockManagerServer extends stockManagerImplBase {
         // return failure message with stock volume
         else {
           System.out.println("Not enough stock available");
-          
+
           responseObserver.onNext(RemoveStockMessage.newBuilder().setIsSuccess(false).setStockMessage(s).build());
           responseObserver.onCompleted();
           return;
@@ -225,9 +225,13 @@ public class StockManagerServer extends stockManagerImplBase {
     responseObserver.onCompleted();
 
   }
+
   @Override
-  public void stockSummary(EmptyStockMessage request, StreamObserver<StockMessage> responseObserver){
-    for(StockMessage s: stockDatabase.getStockMessageList()){
+  public void stockSummary(EmptyStockMessage request, StreamObserver<StockMessage> responseObserver) {
+    System.out.println("Stock Summary request");
+    for (StockMessage s : stockDatabase.getStockMessageList()) {
+      System.out.println(s.getStockType() + " : " + s.getStockVolume());
+
       responseObserver.onNext(s);
     }
     responseObserver.onCompleted();
