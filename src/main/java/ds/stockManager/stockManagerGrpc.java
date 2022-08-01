@@ -60,21 +60,21 @@ public final class stockManagerGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<ds.stockManager.StockMessage,
-      ds.stockManager.StockMessage> getRemoveStockMethod;
+      ds.stockManager.RemoveStockMessage> getRemoveStockMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "RemoveStock",
       requestType = ds.stockManager.StockMessage.class,
-      responseType = ds.stockManager.StockMessage.class,
+      responseType = ds.stockManager.RemoveStockMessage.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<ds.stockManager.StockMessage,
-      ds.stockManager.StockMessage> getRemoveStockMethod() {
-    io.grpc.MethodDescriptor<ds.stockManager.StockMessage, ds.stockManager.StockMessage> getRemoveStockMethod;
+      ds.stockManager.RemoveStockMessage> getRemoveStockMethod() {
+    io.grpc.MethodDescriptor<ds.stockManager.StockMessage, ds.stockManager.RemoveStockMessage> getRemoveStockMethod;
     if ((getRemoveStockMethod = stockManagerGrpc.getRemoveStockMethod) == null) {
       synchronized (stockManagerGrpc.class) {
         if ((getRemoveStockMethod = stockManagerGrpc.getRemoveStockMethod) == null) {
           stockManagerGrpc.getRemoveStockMethod = getRemoveStockMethod = 
-              io.grpc.MethodDescriptor.<ds.stockManager.StockMessage, ds.stockManager.StockMessage>newBuilder()
+              io.grpc.MethodDescriptor.<ds.stockManager.StockMessage, ds.stockManager.RemoveStockMessage>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "stockmanager.stockManager", "RemoveStock"))
@@ -82,7 +82,7 @@ public final class stockManagerGrpc {
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   ds.stockManager.StockMessage.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  ds.stockManager.StockMessage.getDefaultInstance()))
+                  ds.stockManager.RemoveStockMessage.getDefaultInstance()))
                   .setSchemaDescriptor(new stockManagerMethodDescriptorSupplier("RemoveStock"))
                   .build();
           }
@@ -166,7 +166,7 @@ public final class stockManagerGrpc {
      * </pre>
      */
     public void removeStock(ds.stockManager.StockMessage request,
-        io.grpc.stub.StreamObserver<ds.stockManager.StockMessage> responseObserver) {
+        io.grpc.stub.StreamObserver<ds.stockManager.RemoveStockMessage> responseObserver) {
       asyncUnimplementedUnaryCall(getRemoveStockMethod(), responseObserver);
     }
 
@@ -191,7 +191,7 @@ public final class stockManagerGrpc {
             asyncUnaryCall(
               new MethodHandlers<
                 ds.stockManager.StockMessage,
-                ds.stockManager.StockMessage>(
+                ds.stockManager.RemoveStockMessage>(
                   this, METHODID_REMOVE_STOCK)))
           .addMethod(
             getStockSummaryMethod(),
@@ -239,7 +239,7 @@ public final class stockManagerGrpc {
      * </pre>
      */
     public void removeStock(ds.stockManager.StockMessage request,
-        io.grpc.stub.StreamObserver<ds.stockManager.StockMessage> responseObserver) {
+        io.grpc.stub.StreamObserver<ds.stockManager.RemoveStockMessage> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getRemoveStockMethod(), getCallOptions()), request, responseObserver);
     }
@@ -276,7 +276,7 @@ public final class stockManagerGrpc {
      *Remove stock, retunr message is current level of that stock
      * </pre>
      */
-    public ds.stockManager.StockMessage removeStock(ds.stockManager.StockMessage request) {
+    public ds.stockManager.RemoveStockMessage removeStock(ds.stockManager.StockMessage request) {
       return blockingUnaryCall(
           getChannel(), getRemoveStockMethod(), getCallOptions(), request);
     }
@@ -313,7 +313,7 @@ public final class stockManagerGrpc {
      *Remove stock, retunr message is current level of that stock
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<ds.stockManager.StockMessage> removeStock(
+    public com.google.common.util.concurrent.ListenableFuture<ds.stockManager.RemoveStockMessage> removeStock(
         ds.stockManager.StockMessage request) {
       return futureUnaryCall(
           getChannel().newCall(getRemoveStockMethod(), getCallOptions()), request);
@@ -343,7 +343,7 @@ public final class stockManagerGrpc {
       switch (methodId) {
         case METHODID_REMOVE_STOCK:
           serviceImpl.removeStock((ds.stockManager.StockMessage) request,
-              (io.grpc.stub.StreamObserver<ds.stockManager.StockMessage>) responseObserver);
+              (io.grpc.stub.StreamObserver<ds.stockManager.RemoveStockMessage>) responseObserver);
           break;
         case METHODID_STOCK_SUMMARY:
           serviceImpl.stockSummary((ds.stockManager.EmptyStockMessage) request,

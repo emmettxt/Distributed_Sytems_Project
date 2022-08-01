@@ -174,4 +174,50 @@ public class StockManagerServer extends stockManagerImplBase {
     stockDatabase = newstockDbBuilder.build();
     return newTotalStock;
   }
+
+  @Override
+  public void removeStock(StockMessage stockMessage, StreamObserver<RemoveStockMessage> responseObserver) {
+
+    // cehck the database for stock
+    for (StockMessage s : stockDatabase.getStockMessageList()) {
+      // if exists
+      if (s.getStockType().equals(stockMessage.getStockType())) {
+
+        // if the volume is enough
+        if (s.getStockVolume() >= stockMessage.getStockVolume()) {
+
+          // add stock with negative amount
+          StockMessage newTotalStock = addToStockDB(
+              StockMessage.newBuilder()
+                  .setStockVolume(-1 * stockMessage.getStockVolume())
+                  .setStockType(stockMessage.getStockType())
+                  .build());
+          responseObserver
+              .onNext(RemoveStockMessage.newBuilder().setIsSuccess(true).setStockMessage(newTotalStock).build());
+          responseObserver.onCompleted();
+          return;
+        }
+        // else there is not enough stock to remove
+        // return failure message with stock volume
+        else {
+          responseObserver.onNext(RemoveStockMessage.newBuilder().setIsSuccess(false).setStockMessage(s).build());
+          responseObserver.onCompleted();
+          return;
+        }
+      }
+    }
+
+    // Stock does not exist at all in DB, return 0
+    responseObserver.onNext(
+        RemoveStockMessage.newBuilder()
+            .setIsSuccess(false)
+            .setStockMessage(
+                StockMessage
+                    .newBuilder()
+                    .setStockType(stockMessage.getStockType())
+                    .setStockVolume(0))
+            .build());
+    responseObserver.onCompleted();
+
+  }
 }

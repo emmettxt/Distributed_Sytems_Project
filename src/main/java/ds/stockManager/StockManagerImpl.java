@@ -20,6 +20,11 @@ public final class StockManagerImpl {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_stockmanager_StockMessage_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_stockmanager_RemoveStockMessage_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_stockmanager_RemoveStockMessage_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_stockmanager_EmptyStockMessage_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -40,16 +45,19 @@ public final class StockManagerImpl {
     java.lang.String[] descriptorData = {
       "\n\022stockManager.proto\022\014stockmanager\"6\n\014St" +
       "ockMessage\022\021\n\tstockType\030\001 \001(\t\022\023\n\013stockVo" +
-      "lume\030\002 \001(\001\"\023\n\021EmptyStockMessage\"A\n\rStock" +
-      "Database\0220\n\014StockMessage\030\001 \003(\0132\032.stockma" +
-      "nager.StockMessage2\362\001\n\014stockManager\022H\n\010A" +
-      "ddStock\022\032.stockmanager.StockMessage\032\032.st" +
-      "ockmanager.StockMessage\"\000(\0010\001\022G\n\013RemoveS" +
-      "tock\022\032.stockmanager.StockMessage\032\032.stock" +
-      "manager.StockMessage\"\000\022O\n\014StockSummary\022\037" +
-      ".stockmanager.EmptyStockMessage\032\032.stockm" +
-      "anager.StockMessage\"\0000\001B%\n\017ds.stockManag" +
-      "erB\020StockManagerImplP\001b\006proto3"
+      "lume\030\002 \001(\001\"Y\n\022RemoveStockMessage\022\021\n\tisSu" +
+      "ccess\030\001 \001(\010\0220\n\014stockMessage\030\002 \001(\0132\032.stoc" +
+      "kmanager.StockMessage\"\023\n\021EmptyStockMessa" +
+      "ge\"A\n\rStockDatabase\0220\n\014StockMessage\030\001 \003(" +
+      "\0132\032.stockmanager.StockMessage2\370\001\n\014stockM" +
+      "anager\022H\n\010AddStock\022\032.stockmanager.StockM" +
+      "essage\032\032.stockmanager.StockMessage\"\000(\0010\001" +
+      "\022M\n\013RemoveStock\022\032.stockmanager.StockMess" +
+      "age\032 .stockmanager.RemoveStockMessage\"\000\022" +
+      "O\n\014StockSummary\022\037.stockmanager.EmptyStoc" +
+      "kMessage\032\032.stockmanager.StockMessage\"\0000\001" +
+      "B%\n\017ds.stockManagerB\020StockManagerImplP\001b" +
+      "\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -69,14 +77,20 @@ public final class StockManagerImpl {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stockmanager_StockMessage_descriptor,
         new java.lang.String[] { "StockType", "StockVolume", });
-    internal_static_stockmanager_EmptyStockMessage_descriptor =
+    internal_static_stockmanager_RemoveStockMessage_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_stockmanager_RemoveStockMessage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_stockmanager_RemoveStockMessage_descriptor,
+        new java.lang.String[] { "IsSuccess", "StockMessage", });
+    internal_static_stockmanager_EmptyStockMessage_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_stockmanager_EmptyStockMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stockmanager_EmptyStockMessage_descriptor,
         new java.lang.String[] { });
     internal_static_stockmanager_StockDatabase_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_stockmanager_StockDatabase_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_stockmanager_StockDatabase_descriptor,

@@ -11,7 +11,7 @@ service  stockManager{
   rpc AddStock(stream StockMessage) returns (stream StockMessage){}
 
   //Remove stock, retunr message is current level of that stock
-  rpc RemoveStock(StockMessage) returns(StockMessage){}
+  rpc RemoveStock(StockMessage) returns(RemoveStockMessage){}
 
   rpc StockSummary(EmptyStockMessage) returns (stream StockMessage){}
 }
@@ -21,6 +21,11 @@ message StockMessage{
   double stockVolume =2;
 }
 
+message RemoveStockMessage{
+  bool isSuccess =1; //true if there was enough stock to remove and was removed.
+  StockMessage stockMessage =2;
+}
+
 message EmptyStockMessage{}
 
 
@@ -28,4 +33,5 @@ message EmptyStockMessage{}
 message StockDatabase{
   repeated StockMessage StockMessage = 1;
 }
+
 

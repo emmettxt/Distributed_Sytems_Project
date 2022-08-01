@@ -69,7 +69,6 @@ ds\alerter\AlertMessage$Builder.class
 ds\gui\MainGUIApplication$4.class
 ds\stockManager\stockManagerGrpc$stockManagerBlockingStub.class
 ds\gui\MainGUIApplication$1.class
-ds\stockManager\StockManagerServer.class
 ds\animalLocator\HeardMemeberNMessage$1.class
 ds\stockManager\StockDatabaseOrBuilder.class
 ds\alerter\EmptyMessage$Builder.class
