@@ -111,7 +111,7 @@ public class MainGUIApplication {
 		});
 		panel_service_selector.add(service2Button);
 
-		JButton service3Button = new JButton("Service 3");
+		JButton service3Button = new JButton(stockManagerPanel.Label);
 		service3Button.addActionListener(new ActionListener() {
 
 			@Override
