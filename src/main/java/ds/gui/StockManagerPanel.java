@@ -11,6 +11,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import ds.stockManager.EmptyStockMessage;
@@ -31,6 +34,7 @@ class StockManagerPanel {
     servicePanel.setLayout(new BoxLayout(servicePanel, BoxLayout.Y_AXIS));
     refreshCurrentStockTypes();
     servicePanel.add(addStockPanel());
+    servicePanel.add(stockSummaryPanel());
   }
 
   private ArrayList<String> currentStockTypes;
@@ -143,6 +147,30 @@ class StockManagerPanel {
     addButton.setEnabled(false);
 
     return addStockPanel;
+  }
+  private JPanel stockSummaryPanel(){
+    JPanel stockSummaryPanel = new JPanel();
+    JTextArea stockSummaryTextArea = new JTextArea(5, 20);
+    stockSummaryTextArea.setEditable(false);
+    JScrollPane stockSummaryScrolPane = new JScrollPane(stockSummaryTextArea);
+    JButton stockSummaryButton = new JButton("Get Stock Summary");
+
+    stockSummaryButton.addActionListener(new ActionListener(){
+
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        refreshCurrentStockTypes();
+        stockSummaryTextArea.setText("");
+        for(StockMessage s:currentStock){
+          stockSummaryTextArea.append(s.getStockType() + " : " + s.getStockVolume() + "\n");
+        }
+        
+      }
+
+    });
+    stockSummaryPanel.add(stockSummaryButton);
+    stockSummaryPanel.add(stockSummaryScrolPane);
+    return stockSummaryPanel;
   }
 
 }

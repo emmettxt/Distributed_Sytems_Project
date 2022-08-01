@@ -1,8 +1,5 @@
 {
   "StockMessage": [{
-    "stockType": "Grain",
-    "stockVolume": 150.0
-  }, {
     "stockType": "Feed",
     "stockVolume": 200.0
   }, {
@@ -14,5 +11,8 @@
   }, {
     "stockType": "other",
     "stockVolume": 5.0
+  }, {
+    "stockType": "Grain",
+    "stockVolume": 145.0
   }]
 }

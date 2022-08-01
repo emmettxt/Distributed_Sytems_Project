@@ -126,15 +126,4 @@ public class MainGUIApplication {
 		servicePanels.addservicePanels();
 	}
 
-	private JPanel service3Initialise() {
-		JPanel panel_service_1 = new JPanel();
-
-		JLabel lblNewLabel_1 = new JLabel("Service 3 Label");
-
-		panel_service_1.add(lblNewLabel_1);
-		panel_service_1.setVisible(false);
-		return panel_service_1;
-
-	}
-
 }
