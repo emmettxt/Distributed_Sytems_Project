@@ -122,7 +122,8 @@ public class StockManagerServer extends stockManagerImplBase {
       @Override
       public void onNext(StockMessage stockMessage) {
         // add to database object
-        addToStockDB(stockMessage);
+        System.out.print("Recieved " + stockMessage.getStockVolume() + " " + stockMessage.getStockType());
+        responseObserver.onNext(addToStockDB(stockMessage));
 
       }
 
@@ -135,6 +136,7 @@ public class StockManagerServer extends stockManagerImplBase {
       @Override
       public void onCompleted() {
         StockManagerUtil.writeToDB(stockDatabase);
+        responseObserver.onCompleted();
 
       }
 
@@ -144,7 +146,10 @@ public class StockManagerServer extends stockManagerImplBase {
 
   // method that add stock message to Db. Checks if aleardy exists and add to
   // total. or add new item.
-  private void addToStockDB(StockMessage newStockMessage) {
+  // returns the new StockMessage of that stock type in the DB
+  private StockMessage addToStockDB(StockMessage newStockMessage) {
+    System.out.println("Adding " + newStockMessage.getStockVolume() + " " + newStockMessage.getStockType() + " to DB");
+    StockMessage newTotalStock = null;
     List<StockMessage> stockMessageList = stockDatabase.getStockMessageList();
     ds.stockManager.StockDatabase.Builder newstockDbBuilder = StockDatabase.newBuilder();
     // go through each current stock item
@@ -152,14 +157,21 @@ public class StockManagerServer extends stockManagerImplBase {
       // if is of the same type as new stock item replace with new value
       if (stockMessage.getStockType().equals(newStockMessage.getStockType())) {
         Double newVolume = stockMessage.getStockVolume() + newStockMessage.getStockVolume();
-        newstockDbBuilder.addStockMessage(
-            StockMessage.newBuilder().setStockType(stockMessage.getStockType()).setStockVolume(newVolume));
+        newTotalStock = StockMessage.newBuilder().setStockType(stockMessage.getStockType()).setStockVolume(newVolume)
+            .build();
       }
-      //just add to new db
-      else{
+      // just add to new db
+      else {
         newstockDbBuilder.addStockMessage(stockMessage);
       }
     }
+    // if stock was not found in DB
+    if (newTotalStock == null) {
+      newTotalStock = newStockMessage;
+
+    }
+    newstockDbBuilder.addStockMessage(newTotalStock);
     stockDatabase = newstockDbBuilder.build();
+    return newTotalStock;
   }
 }
