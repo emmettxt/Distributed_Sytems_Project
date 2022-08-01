@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.CountDownLatch;
-import java.util.stream.Stream;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
@@ -15,6 +14,7 @@ import ds.stockManager.stockManagerGrpc.stockManagerBlockingStub;
 import ds.stockManager.stockManagerGrpc.stockManagerStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.internal.Stream;
 import io.grpc.stub.StreamObserver;
 
 public class StockManagerClient {
@@ -135,7 +135,7 @@ public class StockManagerClient {
           }
 
         });
-    String[] stockTypes = { "Wood", "Deisel", "Grain", "Feed" };
+    String[] stockTypes = { "Wood", "Diesel", "Grain", "Feed" };
     for (int i = 0; i < 4; i++) {
 
       StockMessage stockMessage = StockMessage.newBuilder().setStockType(stockTypes[i]).setStockVolume(10 + 10 * i)
@@ -153,6 +153,32 @@ public class StockManagerClient {
     }
 
     addStockStreamObserver.onCompleted();
+
+
+
+    ///Remove Stock
+
+    StockMessage removeStock1 = StockMessage.newBuilder().setStockType("Diesel").setStockVolume(10).build();
+    StockMessage removeStock2 = StockMessage.newBuilder().setStockType("Diesel").setStockVolume(1000).build();
+    StockMessage removeStock3 = StockMessage.newBuilder().setStockType("DNE").setStockVolume(1).build();
+
+    StockMessage[] removMessages = {removeStock1,removeStock2,removeStock3};
+
+    for(StockMessage r: removMessages){
+      System.out.println("removing " + r.getStockVolume() + " of " + r.getStockType());
+      
+      RemoveStockMessage resp = stockManagerClient.getBlockingStub().removeStock(r);
+      if(resp.getIsSuccess()){
+        System.out.println("removed success current volume of " + resp.getStockMessage().getStockType() + " is " +  resp.getStockMessage().getStockVolume());
+
+      }else{
+        System.out.println("removed unsuccessful current volume of " + resp.getStockMessage().getStockType() + " is " +  resp.getStockMessage().getStockVolume());
+
+      }
+
+    }
+
+
 
   }
 }

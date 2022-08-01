@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceInfo;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import ds.stockManager.stockManagerGrpc.stockManagerImplBase;
 import io.grpc.Server;
@@ -177,15 +178,15 @@ public class StockManagerServer extends stockManagerImplBase {
 
   @Override
   public void removeStock(StockMessage stockMessage, StreamObserver<RemoveStockMessage> responseObserver) {
-
+    System.out.println("Request to remove " + stockMessage.getStockVolume() + " of " + stockMessage.getStockType());
     // cehck the database for stock
     for (StockMessage s : stockDatabase.getStockMessageList()) {
       // if exists
       if (s.getStockType().equals(stockMessage.getStockType())) {
-
+        System.out.println("Exists in DB");
         // if the volume is enough
         if (s.getStockVolume() >= stockMessage.getStockVolume()) {
-
+          System.out.println("Enough stock available");
           // add stock with negative amount
           StockMessage newTotalStock = addToStockDB(
               StockMessage.newBuilder()
@@ -194,18 +195,22 @@ public class StockManagerServer extends stockManagerImplBase {
                   .build());
           responseObserver
               .onNext(RemoveStockMessage.newBuilder().setIsSuccess(true).setStockMessage(newTotalStock).build());
+          StockManagerUtil.writeToDB(stockDatabase);
           responseObserver.onCompleted();
           return;
         }
         // else there is not enough stock to remove
         // return failure message with stock volume
         else {
+          System.out.println("Not enough stock available");
+          
           responseObserver.onNext(RemoveStockMessage.newBuilder().setIsSuccess(false).setStockMessage(s).build());
           responseObserver.onCompleted();
           return;
         }
       }
     }
+    System.out.println("No Stock in DB");
 
     // Stock does not exist at all in DB, return 0
     responseObserver.onNext(
@@ -219,5 +224,12 @@ public class StockManagerServer extends stockManagerImplBase {
             .build());
     responseObserver.onCompleted();
 
+  }
+  @Override
+  public void stockSummary(EmptyStockMessage request, StreamObserver<StockMessage> responseObserver){
+    for(StockMessage s: stockDatabase.getStockMessageList()){
+      responseObserver.onNext(s);
+    }
+    responseObserver.onCompleted();
   }
 }
