@@ -3,6 +3,7 @@ package ds.stockManager;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 
 import javax.jmdns.JmDNS;
@@ -178,7 +179,16 @@ public class StockManagerClient {
 
     }
 
+    //stock summary
+    EmptyStockMessage emptyStockMessage  = EmptyStockMessage.newBuilder().build();
 
+    Iterator<StockMessage> stocksummary = stockManagerClient.getBlockingStub().stockSummary(emptyStockMessage);
+
+    System.out.println("Stock Summary: ");
+    while(stocksummary.hasNext()){
+      StockMessage s = stocksummary.next();
+      System.out.println(s.getStockType() + " : " + s.getStockVolume());
+    }
 
   }
 }
