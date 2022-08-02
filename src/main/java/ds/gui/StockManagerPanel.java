@@ -2,22 +2,19 @@ package ds.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.sound.midi.SysexMessage;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import ds.stockManager.EmptyStockMessage;
-import ds.stockManager.StockDatabase;
+import ds.stockManager.RemoveStockMessage;
 import ds.stockManager.StockManagerClient;
 import ds.stockManager.StockMessage;
 import io.grpc.stub.StreamObserver;
@@ -25,7 +22,6 @@ import io.grpc.stub.StreamObserver;
 class StockManagerPanel {
   public JPanel servicePanel;
   public String Label = "Stock Manager";
-  // TODO Enable AnimalLocatorClient
   private StockManagerClient client = new StockManagerClient();
 
   StockManagerPanel() {
@@ -35,6 +31,7 @@ class StockManagerPanel {
     refreshCurrentStockTypes();
     servicePanel.add(addStockPanel());
     servicePanel.add(stockSummaryPanel());
+    servicePanel.add(removeStockPanel());
   }
 
   private ArrayList<String> currentStockTypes;
@@ -148,23 +145,24 @@ class StockManagerPanel {
 
     return addStockPanel;
   }
-  private JPanel stockSummaryPanel(){
+
+  private JPanel stockSummaryPanel() {
     JPanel stockSummaryPanel = new JPanel();
     JTextArea stockSummaryTextArea = new JTextArea(5, 20);
     stockSummaryTextArea.setEditable(false);
     JScrollPane stockSummaryScrolPane = new JScrollPane(stockSummaryTextArea);
     JButton stockSummaryButton = new JButton("Get Stock Summary");
 
-    stockSummaryButton.addActionListener(new ActionListener(){
+    stockSummaryButton.addActionListener(new ActionListener() {
 
       @Override
       public void actionPerformed(ActionEvent e) {
         refreshCurrentStockTypes();
         stockSummaryTextArea.setText("");
-        for(StockMessage s:currentStock){
+        for (StockMessage s : currentStock) {
           stockSummaryTextArea.append(s.getStockType() + " : " + s.getStockVolume() + "\n");
         }
-        
+
       }
 
     });
@@ -173,4 +171,48 @@ class StockManagerPanel {
     return stockSummaryPanel;
   }
 
+  private JPanel removeStockPanel() {
+    JPanel removeStockPanel = new JPanel();
+
+    // combobox for stock type to remove
+    String[] arr = new String[currentStockTypes.size()];
+    arr = currentStockTypes.toArray(arr);
+    JComboBox<String> stockTypeComboBox = new JComboBox<String>(arr);
+    removeStockPanel.add(stockTypeComboBox);
+
+    // text field for stock amount to remove
+    JTextField stockVolumeTextField = new JTextField(2);
+    removeStockPanel.add(stockVolumeTextField);
+
+    JButton removeStockButton = new JButton("Remove Stock");
+    removeStockPanel.add(removeStockButton);
+
+    JTextArea removeStockResonse = new JTextArea(3, 20);
+    removeStockResonse.setEditable(false);
+    removeStockPanel.add(removeStockResonse);
+
+    removeStockButton.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        double stockVolume = Double.parseDouble(stockVolumeTextField.getText());
+        StockMessage stockMessage = StockMessage.newBuilder()
+            .setStockType(stockTypeComboBox.getSelectedItem().toString()).setStockVolume(stockVolume).build();
+        RemoveStockMessage resp = client.getBlockingStub().removeStock(stockMessage);
+
+        if (resp.getIsSuccess()) {
+          removeStockResonse.setText("Succeffuly Removed ");
+        } else {
+          removeStockResonse.setText("Could not remove ");
+        }
+        removeStockResonse.append(stockVolume + " " + stockMessage.getStockType() + " "
+            + resp.getStockMessage().getStockVolume() + " remaining");
+
+      }
+
+    });
+
+    return removeStockPanel;
+  }
 }
