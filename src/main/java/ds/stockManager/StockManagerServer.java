@@ -9,13 +9,14 @@ import java.util.Properties;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceInfo;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import ds.stockManager.stockManagerGrpc.stockManagerImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
-
+/** 
+** Server for Stock Management Started with main method
+ */
 public class StockManagerServer extends stockManagerImplBase {
 
   private StockDatabase stockDatabase;
