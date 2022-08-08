@@ -6,8 +6,6 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.ScrollPaneLayout;
 import javax.swing.JButton;
 
 import java.awt.FlowLayout;
