@@ -127,7 +127,7 @@ public class AnimalLocatorServer extends animalLocatorImplBase {
 
     }
 
-    // add locationMessage to locationMessages and sends to file
+    // add locationMessage to LocationDatabase
     private void newLocationMessage(LocationMessage locationMessage) {
         locationDatabase = LocationDatabase
                 .newBuilder()
