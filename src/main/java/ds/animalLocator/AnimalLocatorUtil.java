@@ -54,7 +54,6 @@ public class AnimalLocatorUtil {
             printWriter.write(json);
             printWriter.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
