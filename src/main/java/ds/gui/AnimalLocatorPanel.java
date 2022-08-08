@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Timestamp;
@@ -128,22 +129,45 @@ public class AnimalLocatorPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int lat = Integer.parseInt(latitudeTextField.getText());
-				int lon = Integer.parseInt(longitudeTextField.getText());
-				Point point = Point.newBuilder().setLatitude(lat).setLongitude(lon).build();
+				int lat = 0, lon = 0;
+				boolean isValid = true;
+				try {
+					lat = Integer.parseInt(latitudeTextField.getText());
+					if (lat < 0) {
+						throw new NumberFormatException();
+					}
+				} catch (NumberFormatException nfe) {
+					isValid = false;
+					showMessageDialog(null, latitudeTextField.getText() + " is not a valid latitude");
 
-				String animalId = animalIdComboBox.getSelectedItem().toString();
+				}
+				try {
+					lon = Integer.parseInt(longitudeTextField.getText());
+					if (lon < 0) {
+						throw new NumberFormatException();
+					}
+				} catch (NumberFormatException nfe) {
+					isValid = false;
 
-				long millis = System.currentTimeMillis();
-				Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
-						.setNanos((int) ((millis % 1000) * 1000000)).build();
+					showMessageDialog(null, longitudeTextField.getText() + " is not a valid longitude");
+				}
+				if (isValid) {
 
-				LocationMessage locationMessage = LocationMessage.newBuilder().setAnimalId(animalId).setPoint(point)
-						.setTime(timestamp).build();
-				locationUpdateRequestObserver.onNext(locationMessage);
+					Point point = Point.newBuilder().setLatitude(lat).setLongitude(lon).build();
 
-				longitudeTextField.setText("");
-				latitudeTextField.setText("");
+					String animalId = animalIdComboBox.getSelectedItem().toString();
+
+					long millis = System.currentTimeMillis();
+					Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
+							.setNanos((int) ((millis % 1000) * 1000000)).build();
+
+					LocationMessage locationMessage = LocationMessage.newBuilder().setAnimalId(animalId).setPoint(point)
+							.setTime(timestamp).build();
+					locationUpdateRequestObserver.onNext(locationMessage);
+
+					longitudeTextField.setText("");
+					latitudeTextField.setText("");
+				}
 
 			}
 
@@ -198,13 +222,13 @@ public class AnimalLocatorPanel {
 			public void actionPerformed(ActionEvent e) {
 				textResponse.setText("");
 				String animalId = animalIdComboBox.getSelectedItem().toString();
-				try{
+				try {
 					int n = Integer.parseInt(nTextField.getText());
 					HeardMemeberNMessage heardMemeberNMessage = HeardMemeberNMessage.newBuilder().setAnimalId(animalId)
-					.setN(n).build();
+							.setN(n).build();
 
 					Iterator<LocationMessage> locationMessages = client.getBlockingStub()
-					.lastNLocations(heardMemeberNMessage);
+							.lastNLocations(heardMemeberNMessage);
 					while (locationMessages.hasNext()) {
 						LocationMessage l = locationMessages.next();
 						String time;
@@ -214,10 +238,10 @@ public class AnimalLocatorPanel {
 							time = l.getTime().toString();
 						}
 						textResponse.append("Long: " + l.getPoint().getLongitude()
-						+ " Lat: " + l.getPoint().getLatitude() + " @ " + time + "\n");
+								+ " Lat: " + l.getPoint().getLatitude() + " @ " + time + "\n");
 					}
-						
-				}catch(NumberFormatException nfe){
+
+				} catch (NumberFormatException nfe) {
 					textResponse.setText("Invalid Number: \"" + nTextField.getText() + "\" is not an integer");
 				}
 
