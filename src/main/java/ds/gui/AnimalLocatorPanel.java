@@ -198,22 +198,27 @@ public class AnimalLocatorPanel {
 			public void actionPerformed(ActionEvent e) {
 				textResponse.setText("");
 				String animalId = animalIdComboBox.getSelectedItem().toString();
-				int n = Integer.parseInt(nTextField.getText());
-				HeardMemeberNMessage heardMemeberNMessage = HeardMemeberNMessage.newBuilder().setAnimalId(animalId)
-						.setN(n).build();
-				Iterator<LocationMessage> locationMessages = client.getBlockingStub()
-						.lastNLocations(heardMemeberNMessage);
-				while (locationMessages.hasNext()) {
-					LocationMessage l = locationMessages.next();
-					String time;
-					try {
-						time = JsonFormat.printer().print(l.getTime());
-					} catch (InvalidProtocolBufferException t) {
-						time = l.getTime().toString();
-					}
-					textResponse.append("Long: " + l.getPoint().getLongitude()
-							+ " Lat: " + l.getPoint().getLatitude() + " @ " + time + "\n");
+				try{
+					int n = Integer.parseInt(nTextField.getText());
+					HeardMemeberNMessage heardMemeberNMessage = HeardMemeberNMessage.newBuilder().setAnimalId(animalId)
+					.setN(n).build();
 
+					Iterator<LocationMessage> locationMessages = client.getBlockingStub()
+					.lastNLocations(heardMemeberNMessage);
+					while (locationMessages.hasNext()) {
+						LocationMessage l = locationMessages.next();
+						String time;
+						try {
+							time = JsonFormat.printer().print(l.getTime());
+						} catch (InvalidProtocolBufferException t) {
+							time = l.getTime().toString();
+						}
+						textResponse.append("Long: " + l.getPoint().getLongitude()
+						+ " Lat: " + l.getPoint().getLatitude() + " @ " + time + "\n");
+					}
+						
+				}catch(NumberFormatException nfe){
+					textResponse.setText("Invalid Number: \"" + nTextField.getText() + "\" is not an integer");
 				}
 
 			}
@@ -255,10 +260,10 @@ public class AnimalLocatorPanel {
 						time = l.getTime().toString();
 					}
 					textResponse.append(
-							l.getAnimalId() + ": \n\t"
+							l.getAnimalId() + ": \n   "
 									+ "Long: " + l.getPoint().getLongitude()
 									+ " Lat: " + l.getPoint().getLatitude()
-									+ "\n\t" + time + "\n");
+									+ "\n   " + time + "\n");
 
 				}
 
