@@ -13,7 +13,6 @@ import javax.jmdns.ServiceInfo;
 import ds.alerter.AlerterGrpc.AlerterImplBase;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.internal.Stream;
 import io.grpc.stub.StreamObserver;
 
 public class AlerterServer extends AlerterImplBase {
