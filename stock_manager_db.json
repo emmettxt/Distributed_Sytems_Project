@@ -1,8 +1,5 @@
 {
   "StockMessage": [{
-    "stockType": "Diesel",
-    "stockVolume": 80.0
-  }, {
     "stockType": "Wood",
     "stockVolume": 60.0
   }, {
@@ -17,5 +14,8 @@
   }, {
     "stockType": "New Stock Type",
     "stockVolume": 5.0
+  }, {
+    "stockType": "Diesel",
+    "stockVolume": 79.0
   }]
 }

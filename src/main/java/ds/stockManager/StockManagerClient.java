@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
@@ -51,9 +52,13 @@ public class StockManagerClient {
         .usePlaintext()
         .build();
 
-    blockingStub = stockManagerGrpc.newBlockingStub(channel);
+        blockingStub = stockManagerGrpc.newBlockingStub(channel);
+        //add 5 seconond deadline
+        blockingStub = blockingStub.withDeadlineAfter(5, TimeUnit.SECONDS);
 
-    asyncStub = stockManagerGrpc.newStub(channel);
+        asyncStub = stockManagerGrpc.newStub(channel);
+        //add 5 seconond deadline
+        asyncStub = asyncStub.withDeadlineAfter(5, TimeUnit.SECONDS);
 
   }
 

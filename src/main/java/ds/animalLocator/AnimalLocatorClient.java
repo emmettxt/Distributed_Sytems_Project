@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
@@ -57,8 +58,12 @@ public class AnimalLocatorClient {
                 .build();
 
         blockingStub = animalLocatorGrpc.newBlockingStub(channel);
+        //add 5 seconond deadline
+        blockingStub = blockingStub.withDeadlineAfter(5, TimeUnit.SECONDS);
 
         asyncStub = animalLocatorGrpc.newStub(channel);
+        //add 5 seconond deadline
+        asyncStub = asyncStub.withDeadlineAfter(5, TimeUnit.SECONDS);
     }
 
     public static void main(String[] args) throws InvalidProtocolBufferException {
