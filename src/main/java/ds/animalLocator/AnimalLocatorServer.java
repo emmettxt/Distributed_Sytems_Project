@@ -18,7 +18,6 @@ import com.google.protobuf.util.Timestamps;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.internal.Stream;
 import io.grpc.stub.StreamObserver;
 
 import javax.jmdns.JmDNS;

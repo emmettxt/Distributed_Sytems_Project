@@ -18,7 +18,6 @@ import ds.animalLocator.animalLocatorGrpc.animalLocatorBlockingStub;
 import ds.animalLocator.animalLocatorGrpc.animalLocatorStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.internal.Stream;
 import io.grpc.stub.StreamObserver;
 
 public class AnimalLocatorClient {
