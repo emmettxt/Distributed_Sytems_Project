@@ -14,5 +14,8 @@
   }, {
     "stockType": "Feed",
     "stockVolume": 295.0
+  }, {
+    "stockType": "New Stock Type",
+    "stockVolume": 5.0
   }]
 }

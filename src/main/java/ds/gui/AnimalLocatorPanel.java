@@ -2,6 +2,7 @@ package ds.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.BoxLayout;
@@ -32,13 +33,34 @@ import io.grpc.stub.StreamObserver;
 public class AnimalLocatorPanel {
 	public JPanel servicePanel;
 	public String Label = "Animal Locator";
-	// TODO Enable AnimalLocatorClient
 	private AnimalLocatorClient client = new AnimalLocatorClient();
 	StreamObserver<LocationResponse> locationUpdateResponseObserver;
 	StreamObserver<LocationMessage> locationUpdateRequestObserver;
 
+	private String[] currentAnimalIds;
+
+	//method to get the animal ids in the database
+	private void refrshCurrentAnimalIds() {
+		ArrayList<String> currentAnimalIdsArrayList = new ArrayList<>();
+		ds.animalLocator.EmptyMessage emptyMessage = ds.animalLocator.EmptyMessage.newBuilder().build();
+		Iterator<LocationMessage> locationmessages;
+		locationmessages = client.getBlockingStub().currentHeardLocation(emptyMessage);
+		while (locationmessages.hasNext()) {
+			LocationMessage l = locationmessages.next();
+			if(!currentAnimalIdsArrayList.contains(l.getAnimalId())){
+				currentAnimalIdsArrayList.add(l.getAnimalId());
+			}
+
+		}
+		currentAnimalIds = new String[currentAnimalIdsArrayList.size()];
+		currentAnimalIds = currentAnimalIdsArrayList.toArray(currentAnimalIds);
+
+		
+	}
+
 	AnimalLocatorPanel() {
 		// intialise panel and set visibilty
+		refrshCurrentAnimalIds();
 		servicePanel = new JPanel();
 		servicePanel.setVisible(false);
 		servicePanel.setLayout(new BoxLayout(servicePanel, BoxLayout.Y_AXIS));
@@ -71,9 +93,9 @@ public class AnimalLocatorPanel {
 		latitudeTextField.setEnabled(false);
 
 		JComboBox<String> animalIdComboBox = new JComboBox<String>();
-		animalIdComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "AnimalID_1",
-				"AnimalID_2", "AnimalID_3", "AnimalID_4" }));
+		animalIdComboBox.setModel(new DefaultComboBoxModel<String>(currentAnimalIds));
 		animalIdComboBox.setEnabled(false);
+		animalIdComboBox.setEditable(true);
 		locationUpdateJpanel.add(animalIdComboBox);
 
 		JButton sendButton = new JButton();
@@ -197,8 +219,7 @@ public class AnimalLocatorPanel {
 		JButton lstNLocationsButton = new JButton("Last N Locations");
 
 		JComboBox<String> animalIdComboBox = new JComboBox<String>();
-		animalIdComboBox.setModel(new DefaultComboBoxModel<String>(new String[] { "AnimalID_1",
-				"AnimalID_2", "AnimalID_3", "AnimalID_4" }));
+		animalIdComboBox.setModel(new DefaultComboBoxModel<String>(currentAnimalIds));
 		lastNLocationsPanel.add(animalIdComboBox);
 
 		// add label and field for n
