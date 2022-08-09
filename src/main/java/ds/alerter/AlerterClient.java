@@ -25,7 +25,8 @@ public class AlerterClient {
    * @return the blockingStub
    */
   public AlerterBlockingStub getBlockingStub() {
-    return blockingStub;
+    //return stub with 5 second deadline
+    return blockingStub.withDeadlineAfter(5, TimeUnit.SECONDS);
   }
 
   /**
@@ -53,12 +54,8 @@ public class AlerterClient {
         .build();
 
     blockingStub = AlerterGrpc.newBlockingStub(channel);
-    //add 5 seconond deadline
-    blockingStub = blockingStub.withDeadlineAfter(5, TimeUnit.SECONDS);
 
     asyncStub = AlerterGrpc.newStub(channel);
-    //add 5 seconond deadline
-    asyncStub = asyncStub.withDeadlineAfter(5, TimeUnit.SECONDS);
   }
 
   private void discoverAlerterService(String service_type) {

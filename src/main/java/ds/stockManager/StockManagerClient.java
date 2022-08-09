@@ -28,7 +28,8 @@ public class StockManagerClient {
    * @return the blockingStub
    */
   public stockManagerBlockingStub getBlockingStub() {
-    return blockingStub;
+    //return stub with 5 second deadline
+    return blockingStub.withDeadlineAfter(5, TimeUnit.SECONDS);
   }
 
   /**
@@ -53,12 +54,14 @@ public class StockManagerClient {
         .build();
 
         blockingStub = stockManagerGrpc.newBlockingStub(channel);
+        // this does not work as it sets the deadline from when the stub is initialised 
         //add 5 seconond deadline
-        blockingStub = blockingStub.withDeadlineAfter(5, TimeUnit.SECONDS);
+
+        // blockingStub = blockingStub.withDeadlineAfter(5000, TimeUnit.MILLISECONDS);
 
         asyncStub = stockManagerGrpc.newStub(channel);
         //add 5 seconond deadline
-        asyncStub = asyncStub.withDeadlineAfter(5, TimeUnit.SECONDS);
+        // asyncStub = asyncStub.withDeadlineAfter(5000, TimeUnit.MILLISECONDS);
 
   }
 

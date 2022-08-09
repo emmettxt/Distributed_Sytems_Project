@@ -29,20 +29,24 @@ public class AnimalLocatorClient {
      * @return the blockingStub
      */
     public animalLocatorBlockingStub getBlockingStub() {
-        return blockingStub;
+        // return stub with 5 second deadline
+        return blockingStub.withDeadlineAfter(5, TimeUnit.SECONDS);
     }
+
     /**
      * @return the asyncStub
      */
     public animalLocatorStub getAsyncStub() {
-        return asyncStub;
+    //return stub with 60 second deadline
+    return asyncStub;
     }
 
     private ServiceInfo animalLocatorServiceInfo;
 
-    public AnimalLocatorClient(){
+    public AnimalLocatorClient() {
         this("_animalLocator._tcp.local.");
     }
+
     /**
      * @param service_type set equal to "_animalLocator._tcp.local."
      */
@@ -58,12 +62,8 @@ public class AnimalLocatorClient {
                 .build();
 
         blockingStub = animalLocatorGrpc.newBlockingStub(channel);
-        //add 5 seconond deadline
-        blockingStub = blockingStub.withDeadlineAfter(5, TimeUnit.SECONDS);
 
         asyncStub = animalLocatorGrpc.newStub(channel);
-        //add 5 seconond deadline
-        asyncStub = asyncStub.withDeadlineAfter(5, TimeUnit.SECONDS);
     }
 
     public static void main(String[] args) throws InvalidProtocolBufferException {

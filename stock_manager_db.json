@@ -1,21 +1,20 @@
 {
   "StockMessage": [{
     "stockType": "Wood",
-    "stockVolume": 60.0
-  }, {
-    "stockType": "other",
-    "stockVolume": 5.0
+    "stockVolume": 80.0
   }, {
     "stockType": "Grain",
-    "stockVolume": 145.0
+    "stockVolume": 205.0
   }, {
     "stockType": "Feed",
-    "stockVolume": 295.0
-  }, {
-    "stockType": "New Stock Type",
-    "stockVolume": 5.0
+    "stockVolume": 375.0
   }, {
     "stockType": "Diesel",
-    "stockVolume": 79.0
+    "stockVolume": 99.0
+  }, {
+    "stockType": "New Stock Type",
+    "stockVolume": 80.0
+  }, {
+    "stockType": "other"
   }]
 }
